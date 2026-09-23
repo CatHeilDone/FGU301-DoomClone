@@ -1,0 +1,1959 @@
+fileFormatVersion: 2
+guid: 4f68b13094ce5de4db7feaf9b8928b3e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_0
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1419
+        width: 106
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddd2b67725a1f2b46af3f8ec6dc84662
+      internalID: 613330275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_1
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 1256
+        width: 108
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 390981fd3b65f5e44b8f8b37e225ce7c
+      internalID: 76816878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_2
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 1093
+        width: 121
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 872edf8cca735504687017033611c2b7
+      internalID: -2084638375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_3
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 930
+        width: 114
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84e0995a525d9fe48960e6e6194031a0
+      internalID: 525132652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 767
+        width: 101
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b3c88f3700720c4a9a7525801f1aeb1
+      internalID: 837146962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_5
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 767
+        width: 147
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644b18f9f4b0ab542a892448354083fb
+      internalID: -2114561808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_6
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 604
+        width: 157
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42fd472ef6ddfd6479f0ab68aafcce65
+      internalID: 791939042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_7
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 441
+        width: 114
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bfaad04ca6d64c42a695c5ee77877ce
+      internalID: -1138219443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_8
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 278
+        width: 94
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f366518989f1ce468a4612d9f2f8a64
+      internalID: -1829014854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_9
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 231
+        width: 55
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 522cb8710fb5f1c41b869ea7ae5d6614
+      internalID: -893070698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_10
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 231
+        width: 65
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e348bc2e89a51404f858f91ef6800bbc
+      internalID: -350647046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_11
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 207
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d17734e32d14cb7438db87680e725529
+      internalID: 337328860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_12
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 222
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ac99451248ed64296b85edbc07ffff
+      internalID: 649957107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_13
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 222
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918b886719b53074f84152b154076705
+      internalID: -640928374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_14
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 220
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3988e2bf8f7775a43a8c148d029a6185
+      internalID: -2497728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_15
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 222
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf6ac2a461d9c1a44be55c2a164328b9
+      internalID: -1660488116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_16
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 222
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 477025aab4b708e43bb91ce220095f05
+      internalID: -1168035438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_17
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 222
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52037244ee133f34c9ecaeea05c9154b
+      internalID: 278670851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_18
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 222
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 528adaeea1f186840ab236465b42ebc0
+      internalID: -1250936922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_19
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 222
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba22130773302914686bfdbfa95f5e39
+      internalID: -1376114628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_20
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 220
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eced0274e5e90764c88e28c0044a3247
+      internalID: -1521083916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_21
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 222
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dc5e89b0901213469f8d9c338084565
+      internalID: 824982813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_22
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 222
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e698746ad6d6d54ba1afcb99326ce5e
+      internalID: 2093628090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_23
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 208
+        width: 4
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b64a687b365414e45adf5809345d714d
+      internalID: 679674790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_24
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 209
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53b79363aa22bc84881a149d35b5b8cd
+      internalID: 1569185848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_25
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 209
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 228a7638e9f72dd49a2be685f7852c4e
+      internalID: 176924070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_26
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 209
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06b0dbd5149705544920192536b246db
+      internalID: -1619630586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_27
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 209
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3249adca2b2fbd242a10fe6e055558fd
+      internalID: -1425379353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_28
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 209
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcfe437120bd73f4ea1536054f53c8b4
+      internalID: 1670100463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_29
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 208
+        width: 4
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16541c8b721d90a4699f52b3348bb1e5
+      internalID: 1352539911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_30
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 207
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b33f9f88440d414f9a7f339130f9522
+      internalID: 2135315183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_31
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 196
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71372b89874dd9c47b1e3b63a30cfd9a
+      internalID: -795520326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_32
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 196
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8264875ede599844883fa25ef0fb6c30
+      internalID: 1278335514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_33
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 197
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efd2f196361de9a46a008d16ac6157ba
+      internalID: -531807759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_34
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 196
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08491477a83c223478d289d9b6243be4
+      internalID: 791174826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_35
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 196
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f59607c2c9f3afe4da12f36514968d56
+      internalID: -224960617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_36
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 196
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4e3196c0215a0a44b379740cb262736
+      internalID: -1048638287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_37
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 196
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8bed664f5319a844ac930bc47e09ae0
+      internalID: -372947098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_38
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 196
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: befe8f47ea7ee5a43bc8f04b89c1e1b6
+      internalID: 924934270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_39
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 196
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 524de901484e40a46a62f8e2ed8bcfe9
+      internalID: 575356805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_40
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 196
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b5fefb6d652f64396ff7c2f6bc419e
+      internalID: -313836083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_41
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 196
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cd55c4ed8344534aa7457d8e1692de2
+      internalID: -1300842057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_42
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 196
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4092dc0dda90b2547884c4283ca61e76
+      internalID: 920540441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_43
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 196
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87ce7815e5baca64ca56238e4b0f3e50
+      internalID: 238011406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_44
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 196
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af3e6f0e9f590ec4a862846ef6bc3131
+      internalID: -1069935122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_45
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 199
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30715b736fa06dd40ab08ad0826d2f8b
+      internalID: 1199372721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_46
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 199
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6998d5348d4eca4db49c1412f24dd1a
+      internalID: 1257923032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_47
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 183
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66d62126e4fea5c448d3c6de2efb034c
+      internalID: 671586294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_48
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 183
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b34596749d82f534bbbd0fdcb36aadcf
+      internalID: 533877610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_49
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 183
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6bcbbb755e678d4f9ce5e652597f907
+      internalID: -298387899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_50
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 191
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 417fa2f05365e804eb2cc83cfc8e9f7d
+      internalID: -375467992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_51
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 191
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3657bf6135e9344a35c3eb757cc1d2
+      internalID: -272582564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_52
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 191
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60a1011c8ac723748b942d949a52f2c9
+      internalID: -484514377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_53
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 191
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07d259faf84ffc478b623c338d69791
+      internalID: 136198038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_54
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 191
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4406951e0537e3f4693a604fa2765be5
+      internalID: -504688784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_55
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 191
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 524ed3edf634b6a4eb75a45bb888bba5
+      internalID: 750383331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_56
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 191
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24cf55b30fa1e0e40ba2b1b527663698
+      internalID: -1251730792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_57
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 182
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ab34d209ad51a4e8f1727b565bfe48
+      internalID: 1439024433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_58
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 182
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78fb7bc59bafd3b48ba35f6eb4e62069
+      internalID: 1903688849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_59
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 183
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ac7839c15745a84fbaf31759ec7365b
+      internalID: 1877846901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_60
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 183
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44406ec550c755545a5032e826a0d862
+      internalID: 1984838362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_61
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 183
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 185b1661c3e7ca449bcecfd79110e740
+      internalID: 1747495533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_62
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 19
+        width: 172
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d95c3f0fabd4a6447b423aa34a92b08b
+      internalID: -1039195084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_63
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 19
+        width: 147
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6237de136b9dbea4a8ece2cafcf639ee
+      internalID: -596495739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_64
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ffd1ca061e75f947981fe96989ef982
+      internalID: 141991177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_65
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db55e37800bc3cb489b642277c7fccad
+      internalID: 188261374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_66
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14c780c151bd95d47a22601464df36ce
+      internalID: -1530307819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_67
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 1
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a7ec8db65863e845ae411ab3268e68a
+      internalID: -1390395467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_68
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e42bff814d024a49b6827a970eb90c4
+      internalID: -723293565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_69
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 1
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9a4da783d3cda24896058c85b4c0326
+      internalID: 1835385927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_70
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 1
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7581a27cfa0c10840b8f3adc3e1fc2a4
+      internalID: -913536233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_71
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f5b712881e469148bd6ce3ffb7fa1f3
+      internalID: -755259569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_72
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 1
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c58f8cbb79878ef48b8beae14e42a94a
+      internalID: -567190145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_73
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 1
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aca981124dd98b1419d249f3e169449f
+      internalID: 118935645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_74
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 1
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b81f7ce865f15d46a06bc17e11fac38
+      internalID: 1924997721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_75
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 1
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c502c49ca7bbd44598fe45632fe8432
+      internalID: 1158936115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_76
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 1
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f9043f78d2a69b40998c394421e3fca
+      internalID: -987342244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_77
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 1
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e27f847c339d4e49beae82b7ec0c7ea
+      internalID: 1897017243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_78
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 1
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4801a606922161a47b290e983559287e
+      internalID: 1341369125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_79
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 1
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0d6d79e74c34448bd58b1b9032b5dd
+      internalID: -680987925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 8ba02e11a9cca9f44b511a591a2f6ec6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_0: 613330275
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_1: 76816878
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_10: -350647046
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_11: 337328860
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_12: 649957107
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_13: -640928374
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_14: -2497728
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_15: -1660488116
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_16: -1168035438
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_17: 278670851
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_18: -1250936922
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_19: -1376114628
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_2: -2084638375
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_20: -1521083916
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_21: 824982813
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_22: 2093628090
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_23: 679674790
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_24: 1569185848
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_25: 176924070
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_26: -1619630586
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_27: -1425379353
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_28: 1670100463
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_29: 1352539911
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_3: 525132652
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_30: 2135315183
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_31: -795520326
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_32: 1278335514
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_33: -531807759
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_34: 791174826
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_35: -224960617
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_36: -1048638287
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_37: -372947098
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_38: 924934270
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_39: 575356805
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_4: 837146962
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_40: -313836083
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_41: -1300842057
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_42: 920540441
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_43: 238011406
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_44: -1069935122
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_45: 1199372721
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_46: 1257923032
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_47: 671586294
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_48: 533877610
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_49: -298387899
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_5: -2114561808
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_50: -375467992
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_51: -272582564
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_52: -484514377
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_53: 136198038
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_54: -504688784
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_55: 750383331
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_56: -1251730792
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_57: 1439024433
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_58: 1903688849
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_59: 1877846901
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_6: 791939042
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_60: 1984838362
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_61: 1747495533
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_62: -1039195084
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_63: -596495739
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_64: 141991177
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_65: 188261374
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_66: -1530307819
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_67: -1390395467
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_68: -723293565
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_69: 1835385927
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_7: -1138219443
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_70: -913536233
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_71: -755259569
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_72: -567190145
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_73: 118935645
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_74: 1924997721
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_75: 1158936115
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_76: -987342244
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_77: 1897017243
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_78: 1341369125
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_79: -680987925
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_8: -1829014854
+      MS-DOS - DOOM _ DOOM II - id Vault Assets - Super Shotgun (Extended)_9: -893070698
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

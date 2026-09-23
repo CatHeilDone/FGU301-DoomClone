@@ -1,0 +1,1248 @@
+fileFormatVersion: 2
+guid: d6322ea7a57cebb4a836ad2ab4d4180b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 90
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 980
+        width: 40
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdd985240d0681441987b23d828367fc
+      internalID: -1290065470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 980
+        width: 40
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af145c347a590e046bfb1d097edfe78e
+      internalID: -1298579556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_2
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 980
+        width: 36
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60411f67adb6a5743877636db8ee1b45
+      internalID: -1827934128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_3
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 977
+        width: 42
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c14f6f914e756043a02552f8ae54ef4
+      internalID: -1540291714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 100
+        width: 52
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 288bca39b2210a24db95940ff3cc5e52
+      internalID: 1100486143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 897
+        width: 40
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c8a39ac1b7e9ec4b978c7ff648bde7a
+      internalID: 1305054245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_6
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 896
+        width: 40
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d97634e553ea28443a5b3c5df6951127
+      internalID: -497689188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_7
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 898
+        width: 44
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 708f478a965cce64cb8dc37eabbbb05d
+      internalID: 1564704388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_8
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 896
+        width: 29
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48bd838c9425e444eb08c423c281ebfe
+      internalID: 956528407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_9
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 820
+        width: 26
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff42c3bc30541c40aab17472f2cc357
+      internalID: -1499944340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_10
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 818
+        width: 32
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91c0650df9fcd6d4485a5a1d28b0c0a1
+      internalID: -223447908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_11
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 818
+        width: 25
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5783358905167940b60ccd1b793a80a
+      internalID: 958188780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_12
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 819
+        width: 40
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 076b6f93b0d1a1e4bac67fde179ca116
+      internalID: -133787595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_13
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 741
+        width: 21
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64623b9a42dea7c4e9920fd72af00060
+      internalID: 2143916974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_14
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 740
+        width: 30
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf60057b81088654088a4e6b39fdafba
+      internalID: 1958208231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_15
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 741
+        width: 39
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00ca2678cd229aa4a99e1d60c11ecc22
+      internalID: 31966498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_16
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 745
+        width: 24
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc1b0c2711ce8e488467c01d39f5a08
+      internalID: 435771626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_17
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 664
+        width: 37
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5b5aee25cc6975428bdddcab42fccf7
+      internalID: -619063136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_18
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 663
+        width: 31
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b081df2814d84c04d8c089ed38af3ae1
+      internalID: -987470788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_19
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 663
+        width: 39
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0de6c5cb1aa43414281b2860344fce0f
+      internalID: -1762259792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_20
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 666
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0e8dc7294692024486a77964427a157
+      internalID: -1318684139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_21
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 579
+        width: 25
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 023720fdd59f5374495f698d976add4e
+      internalID: 669977488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_22
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 578
+        width: 27
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7abd5c733a714646aca6bf9752c242a
+      internalID: -576149211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_23
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 509
+        width: 42
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa2f6419967c8264da4f1cfebb130dc4
+      internalID: -1852898216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_24
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 509
+        width: 47
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7027d4684e4dbf247a0e32708f57f2c4
+      internalID: -673031684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_25
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 439
+        width: 43
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb4a1bc552c1b684c92096b0f3014878
+      internalID: -2136837952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_26
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 439
+        width: 50
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29edce609b3faa546803f900c0e0d375
+      internalID: 184155761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_27
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 368
+        width: 30
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5be584761a726b45956404a94db0275
+      internalID: 1335194980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_28
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 368
+        width: 34
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d074ac9ae65722e4494afa18e7b82666
+      internalID: 1952889533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_29
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 296
+        width: 30
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7408a337a62e10349b87b57041444745
+      internalID: 1952622496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_30
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 295
+        width: 30
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9afdeb008bfa6447859cddd0f3670f3
+      internalID: -1532616000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_31
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 194
+        width: 53
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdd7b98fa38353b44ac8005fd8b16c19
+      internalID: 920676351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_32
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 193
+        width: 54
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0019e506ceb70f4fad4179cc05f1eb5
+      internalID: 1267630618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_33
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 200
+        width: 31
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bd294305445c344fbc90ceef2053b3a
+      internalID: -954704223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_34
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 213
+        width: 51
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8631a7b176b40f1479510541f8b8fa49
+      internalID: -1036771733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_35
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 201
+        width: 48
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2710c2701e2bd7b4d96d823adf14caf4
+      internalID: -58931849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_36
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 96
+        width: 71
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eacb4fa8ae1e91458d7d69b9b3faa74
+      internalID: -21949094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_37
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 109
+        width: 71
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9e69e0dd9e8324a8301fc6c60a52fa
+      internalID: -174506527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_38
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 125
+        width: 71
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c15229feae840d4fa364d98c4b1b9de
+      internalID: -170763234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_39
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 156
+        width: 70
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb8de31196e4a04a876c57e66aa7b4d
+      internalID: 988849177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_40
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 7
+        width: 35
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1688d04609bf65a4081754d340711bcc
+      internalID: -931938431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_41
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 4
+        width: 42
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a4591dfd73acbd4aa690360ce5e38eb
+      internalID: -913887724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_42
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 6
+        width: 48
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f202589a32841824dab62fdc92b9b052
+      internalID: -2031814624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_43
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 5
+        width: 52
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aba149dc9bd12c45b5e28aeaac1218e
+      internalID: 1148765903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_44
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1
+        width: 85
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00008f049f33b514f8e9a51a906dcf78
+      internalID: -966249301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_45
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 36
+        width: 57
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49ab8d71eb7833345902332fd04ec80c
+      internalID: 279949494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_46
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 43
+        width: 57
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d23c4bf27df424e8beffe72bef7933
+      internalID: 982630184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_47
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 53
+        width: 57
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9270b97118d62ad479f2f981a8d5f426
+      internalID: 59603325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_48
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 58
+        width: 57
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36c1e6bd33f0ccf418d37e0cfcdaeb57
+      internalID: -1902969298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: aec397c78be82cf47b31f076900a2f2a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":42.0,"y":92.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      - key: SpriteEditor.SliceOnImport
+        value: False
+    nameFileIdTable:
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_0: -1290065470
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_1: -1298579556
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_10: -223447908
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_11: 958188780
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_12: -133787595
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_13: 2143916974
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_14: 1958208231
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_15: 31966498
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_16: 435771626
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_17: -619063136
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_18: -987470788
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_19: -1762259792
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_2: -1827934128
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_20: -1318684139
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_21: 669977488
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_22: -576149211
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_23: -1852898216
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_24: -673031684
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_25: -2136837952
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_26: 184155761
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_27: 1335194980
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_28: 1952889533
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_29: 1952622496
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_3: -1540291714
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_30: -1532616000
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_31: 920676351
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_32: 1267630618
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_33: -954704223
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_34: -1036771733
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_35: -58931849
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_36: -21949094
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_37: -174506527
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_38: -170763234
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_39: 988849177
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_4: 1100486143
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_40: -931938431
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_41: -913887724
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_42: -2031814624
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_43: 1148765903
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_44: -966249301
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_45: 279949494
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_46: 982630184
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_47: 59603325
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_48: -1902969298
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_5: 1305054245
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_6: -497689188
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_7: 1564704388
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_8: 956528407
+      MS-DOS - Laura Beyer's DOOM - Enemies - Zombieman Replacement_9: -1499944340
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
