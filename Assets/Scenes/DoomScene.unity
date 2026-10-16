@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8c77f00063d674fa39dc5b4409f36e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponVisual
-  controller: {fileID: 0}
+  controller: {fileID: 192112505}
   bobSpeed: 12
   bobX: 0.02
   bobY: 0.025
@@ -5164,7 +5164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5971171777411216562, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.66
+      value: 40.38
       objectReference: {fileID: 0}
     - target: {fileID: 5971171777411216562, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5193,6 +5193,10 @@ PrefabInstance:
     - target: {fileID: 5971171777411216562, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021831503195330139, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7415279123823996585, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
       propertyPath: anim
