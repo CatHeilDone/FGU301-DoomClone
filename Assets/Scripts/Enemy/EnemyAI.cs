@@ -72,7 +72,7 @@ public class EnemyAI : MonoBehaviour
         if (dist > attackRange * 1.2f) return;   // người chơi đã chạy ra xa
 
         // TODO: trừ máu người chơi ở đây, ví dụ:
-        // playersTransform.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+        playersTransform.GetComponent<PlayerHealth>().DamagePlayer((int)attackDamage);
         Debug.Log("Enemy đánh trúng người chơi: " + attackDamage);
     }
 }
