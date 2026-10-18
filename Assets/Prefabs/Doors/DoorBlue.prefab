@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2501222949130295029}
   - component: {fileID: 3776925798188730095}
   - component: {fileID: 3720507526604737949}
+  - component: {fileID: 4349022204555723515}
   m_Layer: 0
   m_Name: DoorBlue
   m_TagString: Untagged
@@ -75,6 +76,26 @@ MonoBehaviour:
   reqPurple: 0
   reqBlue: 1
   reqOrange: 0
+--- !u!114 &4349022204555723515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716897168322385030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1779179247683769845
 GameObject:
   m_ObjectHideFlags: 0

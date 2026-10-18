@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 7678450804077972663}
   - component: {fileID: 5924232558225968987}
   - component: {fileID: 4607500402324522633}
+  - component: {fileID: -3811923152230332430}
   m_Layer: 0
   m_Name: DoorOrange
   m_TagString: Untagged
@@ -356,6 +357,26 @@ MonoBehaviour:
   reqPurple: 0
   reqBlue: 0
   reqOrange: 1
+--- !u!114 &-3811923152230332430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242785055056888155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &3726388842237166545
 GameObject:
   m_ObjectHideFlags: 0
