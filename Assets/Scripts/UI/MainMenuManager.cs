@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] string loginScene = "Login";
+    [SerializeField] string loadingScene = "LoadingScene";
 
     void Start()
     {
@@ -22,7 +23,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        // Chuyển qua màn hình Loading, LoadingManager sẽ đọc TargetScene để load.
+        PlayerPrefs.SetString("TargetScene", sceneName);
+        SceneManager.LoadScene(loadingScene);
     }
 
     public void Logout()
