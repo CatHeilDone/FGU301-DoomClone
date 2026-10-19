@@ -18,6 +18,7 @@ public class MouseLook : MonoBehaviour
     }
     void Update()
     {
+        if (PauseMenu.IsPaused) return;
         GetInput();
         ModifyInput();
         MovePlayer();
@@ -38,5 +39,15 @@ public class MouseLook : MonoBehaviour
     {
         currenntLookingPos += smoothedMousePos;
         transform.localRotation = Quaternion.AngleAxis(currenntLookingPos, transform.up);
+    }
+
+    public float LookingPos => currenntLookingPos;
+
+    public void SetLookingPos(float value)
+    {
+        currenntLookingPos = value;
+        xMousePos = 0f;
+        smoothedMousePos = 0f;
+        transform.localRotation = Quaternion.AngleAxis(currenntLookingPos, Vector3.up);
     }
 }

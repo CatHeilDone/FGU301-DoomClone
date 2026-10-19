@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.IsPaused) return;
         GetInput();
         MovePlayer();
 
