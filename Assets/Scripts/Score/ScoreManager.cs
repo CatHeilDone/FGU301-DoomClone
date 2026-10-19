@@ -42,13 +42,30 @@ public class ScoreManager : MonoBehaviour
     public float comboWindow = 3f;      // hạ enemy tiếp trong khoảng này thì tăng combo
     public int maxCombo = 8;
 
-    [Header("Style")]
-    public float pointsPerRank = 100f;
-    public float baseDecay = 6f;        // style tụt mỗi giây
-    public float decayPerRank = 4f;     // rank càng cao tụt càng nhanh
-    public float damagePenalty = 80f;   // bị đánh là mất gần 1 rank
+    [Header("Style: ngưỡng từng rank (D, C, B, A, S, SS, SSS)")]
+    // Mỗi rank cần nhiều style hơn rank trước, nên lên cao khó dần
+    public float[] rankThresholds = { 0f, 120f, 300f, 550f, 900f, 1350f, 1900f };
+    public float maxStyle = 2400f;
+
+    [Header("Style: điểm cộng")]
+    public float hitStyle = 3f;          // mỗi 1 sát thương bắn trúng
+    public float killStyle = 30f;
+    public float comboStyleStep = 10f;   // combo x2 +10, x3 +20...
+    public float comboStyleMax = 50f;    // ...tối đa +50 mỗi kill
+    public float longShotStyle = 15f;
+    public float pointBlankStyle = 12f;
+    public float closeCallStyle = 25f;
+    public float waveClearStyle = 60f;
+    [Range(0.5f, 1f)]
+    public float gainFalloff = 0.85f;    // mỗi rank nhận ít style hơn: x0.85 mỗi bậc
     public float longShotDistance = 12f;
     public float pointBlankDistance = 3f;
+
+    [Header("Style: tụt")]
+    public float holdTime = 1.2f;        // vừa cộng style thì giữ nguyên chừng này giây rồi mới tụt
+    public float decayBase = 10f;        // style tụt mỗi giây ở rank D
+    public float decayPerRankStep = 8f;  // mỗi rank cao hơn tụt thêm chừng này mỗi giây
+    public bool dropRankOnHit = true;    // bị đánh: rơi về đầu rank thấp hơn
 
     public int Score { get; private set; }
     public int BestScore { get; private set; }
@@ -61,7 +78,17 @@ public class ScoreManager : MonoBehaviour
     public bool IsGameOver { get; private set; }
 
     /// <summary>-1 là chưa có rank (meter ẩn).</summary>
-    public int RankIndex => Style <= 0f ? -1 : Mathf.Min((int)(Style / pointsPerRank), Ranks.Length - 1);
+    public int RankIndex
+    {
+        get
+        {
+            if (Style <= 0f) return -1;
+            int rank = 0;
+            for (int i = 1; i < Ranks.Length && i < rankThresholds.Length; i++)
+                if (Style >= rankThresholds[i]) rank = i;
+            return rank;
+        }
+    }
 
     /// <summary>Tiến độ 0..1 trong rank hiện tại.</summary>
     public float RankProgress
@@ -70,7 +97,9 @@ public class ScoreManager : MonoBehaviour
         {
             int rank = RankIndex;
             if (rank < 0) return 0f;
-            return Mathf.Clamp01((Style - rank * pointsPerRank) / pointsPerRank);
+            float from = rankThresholds[rank];
+            float to = rank + 1 < rankThresholds.Length ? rankThresholds[rank + 1] : maxStyle;
+            return Mathf.Clamp01((Style - from) / Mathf.Max(1f, to - from));
         }
     }
 
@@ -82,6 +111,7 @@ public class ScoreManager : MonoBehaviour
     public event Action GameOver;
 
     float lastKillTime = -999f;
+    float lastGainTime = -999f;
     int lastRank = -1;
     Transform player;
     PlayerHealth playerHealth;
@@ -136,9 +166,9 @@ public class ScoreManager : MonoBehaviour
             ScoreChanged?.Invoke();
         }
 
-        if (Style > 0f)
+        if (Style > 0f && Time.time - lastGainTime > holdTime)
         {
-            float decay = baseDecay + decayPerRank * Mathf.Max(RankIndex, 0);
+            float decay = decayBase + decayPerRankStep * Mathf.Max(RankIndex, 0);
             Style = Mathf.Max(0f, Style - decay * Time.deltaTime);
             CheckRank();
         }
@@ -147,7 +177,7 @@ public class ScoreManager : MonoBehaviour
     public void EnemyHit(Enemy enemy, float damage)
     {
         if (IsGameOver) return;
-        AddStyle(8f * damage);
+        AddStyle(hitStyle * damage);
     }
 
     public void EnemyKilled(Enemy enemy)
@@ -158,21 +188,24 @@ public class ScoreManager : MonoBehaviour
         lastKillTime = Time.time;
         Kills++;
 
-        AddStyle(60f, "KILL");
+        AddStyle(killStyle, "KILL");
 
-        if (Combo == 2) AddStyle(25f, "DOUBLE KILL");
-        else if (Combo == 3) AddStyle(40f, "TRIPLE KILL");
-        else if (Combo >= 4) AddStyle(20f * Combo, "MULTI KILL x" + Combo);
+        if (Combo >= 2)
+        {
+            float bonus = Mathf.Min(comboStyleStep * (Combo - 1), comboStyleMax);
+            string label = Combo == 2 ? "DOUBLE KILL" : Combo == 3 ? "TRIPLE KILL" : "MULTI KILL x" + Combo;
+            AddStyle(bonus, label);
+        }
 
         if (player && enemy)
         {
             float dist = Vector3.Distance(player.position, enemy.transform.position);
-            if (dist >= longShotDistance) AddStyle(30f, "LONG SHOT");
-            else if (dist <= pointBlankDistance) AddStyle(25f, "POINT BLANK");
+            if (dist >= longShotDistance) AddStyle(longShotStyle, "LONG SHOT");
+            else if (dist <= pointBlankDistance) AddStyle(pointBlankStyle, "POINT BLANK");
         }
 
         if (playerHealth && playerHealth.HealthPercent < 0.25f)
-            AddStyle(40f, "CLOSE CALL");
+            AddStyle(closeCallStyle, "CLOSE CALL");
 
         // Rank tính sau khi cộng style, nên kill đẩy lên rank mới được nhân luôn
         Score += Mathf.RoundToInt(killScore * Combo * RankMultiplier);
@@ -183,7 +216,10 @@ public class ScoreManager : MonoBehaviour
     {
         if (IsGameOver || damage <= 0) return;
 
-        Style = Mathf.Max(0f, Style - damagePenalty);
+        // Bị đánh: rơi về đầu rank thấp hơn một bậc (D thì về 0)
+        int rank = RankIndex;
+        if (dropRankOnHit) Style = rank >= 1 ? rankThresholds[rank - 1] : 0f;
+        else Style = Mathf.Max(0f, Style - (rank >= 1 ? rankThresholds[rank] - rankThresholds[rank - 1] : Style));
         Combo = 0;
         StyleEvent?.Invoke("DAMAGED", false);
         CheckRank();
@@ -194,7 +230,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (IsGameOver) return;
 
-        AddStyle(50f, "WAVE " + wave + " CLEAR");
+        AddStyle(waveClearStyle, "WAVE " + wave + " CLEAR");
         Score += 250 * wave;
         ScoreChanged?.Invoke();
     }
@@ -231,7 +267,7 @@ public class ScoreManager : MonoBehaviour
         Score = run.score;
         Kills = run.kills;
         TimeAlive = run.timeAlive;
-        Style = Mathf.Clamp(run.style, 0f, Ranks.Length * pointsPerRank);
+        Style = Mathf.Clamp(run.style, 0f, maxStyle);
         HighestRank = Mathf.Max(HighestRank, run.highestRank);
         Combo = 0;
         lastKillTime = -999f;
@@ -242,7 +278,10 @@ public class ScoreManager : MonoBehaviour
 
     void AddStyle(float amount, string label = null)
     {
-        Style = Mathf.Min(Style + amount, Ranks.Length * pointsPerRank);
+        // Rank càng cao càng khó lên: x0.85 mỗi bậc (SSS chỉ nhận ~38%)
+        amount *= Mathf.Pow(gainFalloff, Mathf.Max(RankIndex, 0));
+        Style = Mathf.Min(Style + amount, maxStyle);
+        lastGainTime = Time.time;
         if (label != null) StyleEvent?.Invoke(label, true);
         CheckRank();
     }

@@ -12345,12 +12345,30 @@ MonoBehaviour:
   killScore: 100
   comboWindow: 3
   maxCombo: 8
-  pointsPerRank: 100
-  baseDecay: 6
-  decayPerRank: 4
-  damagePenalty: 80
+  rankThresholds:
+  - 0
+  - 120
+  - 300
+  - 550
+  - 900
+  - 1350
+  - 1900
+  maxStyle: 2400
+  hitStyle: 3
+  killStyle: 30
+  comboStyleStep: 10
+  comboStyleMax: 50
+  longShotStyle: 15
+  pointBlankStyle: 12
+  closeCallStyle: 25
+  waveClearStyle: 60
+  gainFalloff: 0.85
   longShotDistance: 12
   pointBlankDistance: 3
+  holdTime: 1.2
+  decayBase: 10
+  decayPerRankStep: 8
+  dropRankOnHit: 1
 --- !u!4 &1648102620
 Transform:
   m_ObjectHideFlags: 0

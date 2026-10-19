@@ -42,10 +42,27 @@ public class LoginUI : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 1f;
 
+        // Bộ gõ tiếng Việt (Unikey, EVKey...) gửi thêm phím xoá lùi và ký tự ghép dấu,
+        // ô nhập của Unity hiểu sai nên mật khẩu bị thêm ký tự thừa. Tắt IME ở màn hình này
+        // và chỉ nhận ký tự ASCII in được cho tên đăng nhập và mật khẩu.
+        Input.imeCompositionMode = IMECompositionMode.Off;
+        foreach (var field in new[] { loginUser, loginPass, signUpUser, signUpPass, signUpConfirm })
+            if (field) field.onValidateInput = AsciiOnly;
+
         // Điền sẵn tên tài khoản đăng nhập lần trước (nếu có).
         loginUser.text = PlayerPrefs.GetString("last_user", "");
 
         ShowLogin();
+    }
+
+    void OnDestroy()
+    {
+        Input.imeCompositionMode = IMECompositionMode.Auto;
+    }
+
+    static char AsciiOnly(string text, int index, char c)
+    {
+        return c >= ' ' && c <= '~' ? c : '\0';   // '\0' = bỏ ký tự này
     }
 
     // ---- Chuyển panel ----
