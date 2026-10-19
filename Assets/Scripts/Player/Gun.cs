@@ -110,16 +110,12 @@ public class Gun : MonoBehaviour
 
     public void GiveAmmo(int amount, GameObject pickup)
     {
-        if (ammo < maxAmmo)
-        {
-            ammo += amount;
-            Destroy(pickup);
-        }
-        if (ammo > maxAmmo)
-        {
-            ammo = maxAmmo;
-            CanvasManager.Instance.UpdateAmmo(ammo);
-        }
+        if (ammo >= maxAmmo)
+            return;
+
+        ammo = Mathf.Min(ammo + amount, maxAmmo);
+        Destroy(pickup);
+        CanvasManager.Instance.UpdateAmmo(ammo);
     }
 
     private void OnTriggerEnter(Collider other)
