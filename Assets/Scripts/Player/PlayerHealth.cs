@@ -9,6 +9,10 @@ public class PlayerHealth : MonoBehaviour
     private int health;
     public int maxArmor;
     private int armor;
+    private bool isDead;
+
+    public bool IsDead => isDead;
+    public float HealthPercent => maxHealth > 0 ? (float)health / maxHealth : 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,19 +23,9 @@ public class PlayerHealth : MonoBehaviour
         CanvasManager.Instance.UpdateArmor(armor); // trước đây gọi nhầm UpdateHealth(armor)
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.RightShift))
-        {
-            DamagePlayer(30);
-            Debug.Log("Player has been Damaged!");
-        }
-    }
-
     public void DamagePlayer(int damage)
     {
-        if (damage <= 0)
+        if (damage <= 0 || isDead)
             return;
 
         if (armor >= damage)
@@ -49,10 +43,17 @@ public class PlayerHealth : MonoBehaviour
         CanvasManager.Instance.UpdateHealth(health);
         CanvasManager.Instance.UpdateArmor(armor);
 
+        if (ScoreManager.Instance) ScoreManager.Instance.PlayerDamaged(damage);
+
         if (health <= 0)
         {
-            Debug.Log("Player is dead!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            isDead = true;
+
+            // Có ScoreManager thì hiện màn hình YOU LOSE, không thì load lại như cũ
+            if (ScoreManager.Instance)
+                ScoreManager.Instance.TriggerGameOver();
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

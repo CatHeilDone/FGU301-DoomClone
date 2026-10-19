@@ -10,10 +10,15 @@ public class Enemy : MonoBehaviour
     public GameObject gunHitEffect;
     public Animator anim;            // kéo model 3D vào (hoặc để trống, code tự tìm)
 
+    public bool IsDead => isDead;
+
     private void Start()
     {
         if (!anim) anim = GetComponentInChildren<Animator>();
         enemyManager = FindObjectOfType<EnemyManager>();
+
+        // Ghi lại chỗ đứng ban đầu làm điểm spawn cho các đợt sau
+        if (EnemySpawner.Instance) EnemySpawner.Instance.Register(this);
     }
 
     void Update()
@@ -26,12 +31,14 @@ public class Enemy : MonoBehaviour
         if (isDead) return;
         Instantiate(gunHitEffect, transform.position, Quaternion.identity);
         enemyHealth -= damage;
+        if (ScoreManager.Instance) ScoreManager.Instance.EnemyHit(this, damage);
     }
 
     void Die()
     {
         isDead = true;
         enemyManager.RemoveEnemy(this);
+        if (ScoreManager.Instance) ScoreManager.Instance.EnemyKilled(this);
 
         // Tắt AI trước, rồi mới tắt agent để tránh lỗi SetDestination trên agent đã tắt
         GetComponent<EnemyAI>().enabled = false;
