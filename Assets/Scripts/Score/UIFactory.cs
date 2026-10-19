@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-/// <summary>Hàm tiện ích dựng UI bằng code cho HUD điểm và màn hình YOU LOSE.</summary>
+/// <summary>Màu chung và hàm tiện ích dựng UI, HUDBuilder dùng để tạo bố cục prefab.</summary>
 public static class UIFactory
 {
     public static readonly Color Ink = new Color32(0x0B, 0x14, 0x17, 0xFF);
@@ -77,7 +77,7 @@ public static class UIFactory
     }
 
     public static Button Button(Transform parent, string label, Vector2 pos, Vector2 size,
-                                Color bg, Color fg, UnityAction onClick)
+                                Color bg, Color fg, UnityAction onClick = null)
     {
         var rt = Rect("Button " + label, parent, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos, size);
         var img = rt.gameObject.AddComponent<Image>();
@@ -89,7 +89,7 @@ public static class UIFactory
         colors.selectedColor = new Color(1.15f, 1.15f, 1.15f, 1f);
         colors.pressedColor = new Color(0.8f, 0.8f, 0.8f, 1f);
         btn.colors = colors;
-        btn.onClick.AddListener(onClick);
+        if (onClick != null) btn.onClick.AddListener(onClick);
 
         var textRt = Rect("Label", rt, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, size);
         Text("Label", textRt, label, 34, fg, TextAlignmentOptions.Center, FontStyles.Bold | FontStyles.Italic);

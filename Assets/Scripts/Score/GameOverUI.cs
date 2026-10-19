@@ -7,67 +7,40 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Màn hình YOU LOSE: điểm, kỷ lục, rank cao nhất, nút chơi lại / về menu.
-/// Hiện khi ScoreManager báo GameOver (PlayerHealth hết máu).
+/// Gắn trên prefab Resources/UI/GameOverScreen, các ô bên dưới kéo thả trong Inspector.
+/// Tạo lại prefab: Tools > DoomClone > Create HUD Prefabs.
 /// </summary>
 public class GameOverUI : MonoBehaviour
 {
     public string mainMenuScene = "MainMenu";
 
+    [Header("UI")]
+    public CanvasGroup panel;               // bật/tắt cả màn hình, component này phải nằm ngoài panel
+    public RectTransform title;             // chữ YOU LOSE, có hiệu ứng đập vào
+    public GameObject newRecord;
+    public TextMeshProUGUI scoreValue;
+    public TextMeshProUGUI bestValue;
+    public TextMeshProUGUI killsValue;
+    public TextMeshProUGUI timeValue;
+    public TextMeshProUGUI rankValue;
+    public Button retryButton;
+    public Button menuButton;
+
     ScoreManager score;
-    CanvasGroup group;
-    RectTransform title;
-    TextMeshProUGUI scoreValue, bestValue, killsValue, timeValue, rankValue, recordText;
-    Button retryButton;
     float shownAt = -1f;
 
     void Start()
     {
         score = ScoreManager.Instance;
-        Build();
-        group.gameObject.SetActive(false);
+        if (panel) panel.gameObject.SetActive(false);
+        if (retryButton) retryButton.onClick.AddListener(Retry);
+        if (menuButton) menuButton.onClick.AddListener(GoToMenu);
         if (score) score.GameOver += Show;
     }
 
     void OnDestroy()
     {
         if (score) score.GameOver -= Show;
-    }
-
-    void Build()
-    {
-        var canvas = UIFactory.CreateCanvas("Game Over", 100, transform);
-        group = canvas.gameObject.AddComponent<CanvasGroup>();
-        var root = canvas.transform;
-
-        var bg = UIFactory.Panel("Background", root, new Color(0.06f, 0.01f, 0.01f, 0.86f));
-        bg.raycastTarget = true;
-
-        title = UIFactory.Rect("", root, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 230), new Vector2(1400, 200));
-        UIFactory.Text("YOU LOSE", title, "YOU LOSE", 180, UIFactory.Hurt, TextAlignmentOptions.Center, FontStyles.Bold | FontStyles.Italic);
-
-        recordText = UIFactory.Text("New Record", UIFactory.Rect("", root, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 110), new Vector2(800, 50)),
-            "NEW RECORD!", 42, UIFactory.Hazard, TextAlignmentOptions.Center, FontStyles.Bold | FontStyles.Italic);
-
-        scoreValue = Stat(root, "SCORE", new Vector2(-300, 10), 76, UIFactory.Fg);
-        bestValue = Stat(root, "BEST", new Vector2(300, 10), 76, UIFactory.Muted);
-        killsValue = Stat(root, "KILLS", new Vector2(-300, -110), 44, UIFactory.Fg);
-        timeValue = Stat(root, "TIME", new Vector2(0, -110), 44, UIFactory.Fg);
-        rankValue = Stat(root, "MAX STYLE", new Vector2(300, -110), 44, UIFactory.Fg);
-
-        retryButton = UIFactory.Button(root, "RETRY", new Vector2(-170, -250), new Vector2(300, 80), UIFactory.Water, UIFactory.Ink, Retry);
-        UIFactory.Button(root, "MAIN MENU", new Vector2(170, -250), new Vector2(300, 80), new Color(1f, 1f, 1f, 0.12f), UIFactory.Fg, GoToMenu);
-
-        UIFactory.Text("Hint", UIFactory.Rect("", root, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -330), new Vector2(800, 30)),
-            "ENTER  retry     ESC  menu", 22, UIFactory.Muted, TextAlignmentOptions.Center, FontStyles.Normal);
-    }
-
-    TextMeshProUGUI Stat(Transform root, string label, Vector2 pos, float size, Color color)
-    {
-        var box = UIFactory.Rect("Stat " + label, root, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos, new Vector2(420, size + 40));
-        UIFactory.Text("Label", UIFactory.Rect("", box, new Vector2(0.5f, 1), new Vector2(0.5f, 1), Vector2.zero, new Vector2(420, 30)),
-            label, 22, UIFactory.Muted, TextAlignmentOptions.Center);
-        return UIFactory.Text("Value", UIFactory.Rect("", box, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -28), new Vector2(420, size + 10)),
-            "0", size, color, TextAlignmentOptions.Center, FontStyles.Bold | FontStyles.Italic);
     }
 
     void Show()
@@ -79,28 +52,40 @@ public class GameOverUI : MonoBehaviour
         DisablePlayerControl();
         EnsureEventSystem();
 
-        scoreValue.text = score.Score.ToString("N0");
-        bestValue.text = score.BestScore.ToString("N0");
-        killsValue.text = score.Kills.ToString();
-        int seconds = Mathf.FloorToInt(score.TimeAlive);
-        timeValue.text = (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00");
-        if (score.HighestRank >= 0)
+        if (scoreValue) scoreValue.text = score.Score.ToString("N0");
+        if (bestValue)
         {
-            var rank = ScoreManager.Ranks[score.HighestRank];
-            rankValue.text = rank.letter;
-            rankValue.color = rank.color;
+            bestValue.text = score.BestScore.ToString("N0");
+            bestValue.color = score.IsNewBest ? UIFactory.Hazard : UIFactory.Muted;
         }
-        else
+        if (killsValue) killsValue.text = score.Kills.ToString();
+        if (timeValue)
         {
-            rankValue.text = "-";
+            int seconds = Mathf.FloorToInt(score.TimeAlive);
+            timeValue.text = (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00");
         }
-        recordText.gameObject.SetActive(score.IsNewBest);
-        bestValue.color = score.IsNewBest ? UIFactory.Hazard : UIFactory.Muted;
+        if (rankValue)
+        {
+            if (score.HighestRank >= 0)
+            {
+                var rank = ScoreManager.Ranks[score.HighestRank];
+                rankValue.text = rank.letter;
+                rankValue.color = rank.color;
+            }
+            else
+            {
+                rankValue.text = "-";
+            }
+        }
+        if (newRecord) newRecord.SetActive(score.IsNewBest);
 
-        group.gameObject.SetActive(true);
-        group.alpha = 0f;
+        if (panel)
+        {
+            panel.gameObject.SetActive(true);
+            panel.alpha = 0f;
+        }
         shownAt = Time.unscaledTime;
-        EventSystem.current?.SetSelectedGameObject(retryButton.gameObject);
+        if (retryButton && EventSystem.current) EventSystem.current.SetSelectedGameObject(retryButton.gameObject);
     }
 
     void Update()
@@ -108,9 +93,9 @@ public class GameOverUI : MonoBehaviour
         if (shownAt < 0f) return;
 
         float t = Time.unscaledTime - shownAt;
-        group.alpha = Mathf.Clamp01(t / 0.6f);
+        if (panel) panel.alpha = Mathf.Clamp01(t / 0.6f);
         // Chữ YOU LOSE đập vào rồi thu nhỏ về
-        title.localScale = Vector3.one * Mathf.Lerp(1.6f, 1f, Mathf.Clamp01(t / 0.35f));
+        if (title) title.localScale = Vector3.one * Mathf.Lerp(1.6f, 1f, Mathf.Clamp01(t / 0.35f));
 
         if (t < 0.5f) return;   // tránh bấm nhầm lúc vừa chết
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.R))
@@ -141,7 +126,6 @@ public class GameOverUI : MonoBehaviour
     static void EnsureEventSystem()
     {
         if (EventSystem.current) return;
-        var go = new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
-        go.transform.SetParent(null);
+        new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
     }
 }
