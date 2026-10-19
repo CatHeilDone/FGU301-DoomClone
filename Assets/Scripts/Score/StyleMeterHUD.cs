@@ -90,7 +90,7 @@ public class StyleMeterHUD : MonoBehaviour
 
         // Điểm chạy dần lên
         shownScore = Mathf.MoveTowards(shownScore, score.Score, Mathf.Max(400f, (score.Score - shownScore) * 6f) * dt);
-        if (scoreText) scoreText.text = Mathf.RoundToInt(shownScore).ToString("N0");
+        if (scoreText) scoreText.text = ScoreManager.FormatScore(Mathf.RoundToInt(shownScore));
 
         comboPunch = Mathf.MoveTowards(comboPunch, 0f, dt * 4f);
         if (comboText) comboText.rectTransform.localScale = Vector3.one * (1f + comboPunch * 0.5f);
@@ -117,7 +117,7 @@ public class StyleMeterHUD : MonoBehaviour
         if (letterText) { letterText.text = info.letter; letterText.color = c; }
         if (letterShadow) letterShadow.text = info.letter;
         if (rankNameText) { rankNameText.text = info.name; rankNameText.color = c; }
-        if (multiplierText) multiplierText.text = "x" + info.multiplier.ToString("0.0");
+        if (multiplierText) multiplierText.text = "x" + info.multiplier.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
         if (barFillImage) barFillImage.color = c;
         if (barFill) barFill.anchorMax = new Vector2(score.RankProgress, barFill.anchorMax.y);
         if (meterBackground) meterBackground.color = new Color(c.r * 0.15f, c.g * 0.15f, c.b * 0.15f, 0.6f);
@@ -173,7 +173,7 @@ public class StyleMeterHUD : MonoBehaviour
     {
         if (comboText) comboText.text = score.Combo >= 2 ? "x" + score.Combo : "";
         if (score.Combo >= 2) comboPunch = 1f;
-        if (bestText) bestText.text = "BEST " + Mathf.Max(score.BestScore, score.Score).ToString("N0");
+        if (bestText) bestText.text = "BEST " + ScoreManager.FormatScore(Mathf.Max(score.BestScore, score.Score));
     }
 
     void OnWaveStarted(int wave)

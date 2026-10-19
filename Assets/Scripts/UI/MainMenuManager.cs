@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,10 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] string loginScene = "Login";
     [SerializeField] string loadingScene = "LoadingScene";
+
+    [Header("Thông tin người chơi (tùy chọn)")]
+    [SerializeField] TMP_Text playerNameText;
+    [SerializeField] TMP_Text bestScoreText;
 
     void Start()
     {
@@ -19,6 +24,9 @@ public class MainMenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1f;
+
+        if (playerNameText) playerNameText.text = AuthService.CurrentUser.ToUpperInvariant();
+        if (bestScoreText) bestScoreText.text = ScoreManager.FormatScore(ScoreManager.GetBestScore(AuthService.CurrentUser));
     }
 
     public void LoadScene(string sceneName)

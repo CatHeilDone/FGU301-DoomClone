@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        var move = FindFirstObjectByType<PlayerMove>();
+        var move = FindAnyObjectByType<PlayerMove>();
         if (move) player = move.transform;
     }
 
@@ -147,7 +147,7 @@ public class EnemySpawner : MonoBehaviour
     int CountAlive()
     {
         int alive = 0;
-        foreach (var e in FindObjectsByType<Enemy>(FindObjectsSortMode.None))
+        foreach (var e in FindObjectsByType<Enemy>())
             if (!e.IsDead && e.gameObject.activeInHierarchy) alive++;
         return alive;
     }

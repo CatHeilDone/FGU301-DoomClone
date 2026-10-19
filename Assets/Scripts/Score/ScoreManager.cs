@@ -3,7 +3,7 @@ using UnityEngine;
 
 /// <summary>
 /// Điểm số, combo và style rank kiểu DMC / ULTRAKILL.
-/// Được GameplayBootstrap tự tạo khi vào scene có PlayerHealth, không cần kéo vào scene.
+/// Gắn trên object "Gameplay Systems" trong DoomScene cùng với EnemySpawner.
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
@@ -86,7 +86,15 @@ public class ScoreManager : MonoBehaviour
     Transform player;
     PlayerHealth playerHealth;
 
-    string BestKey => "best_score_" + (AuthService.IsLoggedIn ? AuthService.CurrentUser : "guest");
+    string BestKey => BestKeyFor(AuthService.IsLoggedIn ? AuthService.CurrentUser : null);
+
+    static string BestKeyFor(string user) => "best_score_" + (string.IsNullOrEmpty(user) ? "guest" : user);
+
+    /// <summary>Kỷ lục đã lưu của một tài khoản, dùng cho Main Menu.</summary>
+    public static int GetBestScore(string user) => PlayerPrefs.GetInt(BestKeyFor(user), 0);
+
+    /// <summary>12,450 — luôn dùng dấu phẩy, không phụ thuộc ngôn ngữ của máy.</summary>
+    public static string FormatScore(int value) => value.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
 
     void Awake()
     {
@@ -101,8 +109,8 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        playerHealth = FindFirstObjectByType<PlayerHealth>();
-        var move = FindFirstObjectByType<PlayerMove>();
+        playerHealth = FindAnyObjectByType<PlayerHealth>();
+        var move = FindAnyObjectByType<PlayerMove>();
         player = move ? move.transform : playerHealth ? playerHealth.transform : null;
     }
 

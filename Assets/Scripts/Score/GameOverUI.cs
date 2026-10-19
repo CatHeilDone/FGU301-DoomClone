@@ -53,10 +53,10 @@ public class GameOverUI : MonoBehaviour
         DisablePlayerControl();
         EnsureEventSystem();
 
-        if (scoreValue) scoreValue.text = score.Score.ToString("N0");
+        if (scoreValue) scoreValue.text = ScoreManager.FormatScore(score.Score);
         if (bestValue)
         {
-            bestValue.text = score.BestScore.ToString("N0");
+            bestValue.text = ScoreManager.FormatScore(score.BestScore);
             bestValue.color = score.IsNewBest ? newRecordColor : bestColor;
         }
         if (killsValue) killsValue.text = score.Kills.ToString();
@@ -119,9 +119,9 @@ public class GameOverUI : MonoBehaviour
 
     static void DisablePlayerControl()
     {
-        foreach (var c in FindObjectsByType<PlayerMove>(FindObjectsSortMode.None)) c.enabled = false;
-        foreach (var c in FindObjectsByType<MouseLook>(FindObjectsSortMode.None)) c.enabled = false;
-        foreach (var c in FindObjectsByType<Gun>(FindObjectsSortMode.None)) c.enabled = false;
+        foreach (var c in FindObjectsByType<PlayerMove>()) c.enabled = false;
+        foreach (var c in FindObjectsByType<MouseLook>()) c.enabled = false;
+        foreach (var c in FindObjectsByType<Gun>()) c.enabled = false;
     }
 
     static void EnsureEventSystem()
