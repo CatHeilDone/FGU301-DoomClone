@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Màn hình YOU LOSE: điểm, kỷ lục, rank cao nhất, nút chơi lại / về menu.
-/// Gắn trên prefab Resources/UI/GameOverScreen, các ô bên dưới kéo thả trong Inspector.
-/// Tạo lại prefab: Tools > DoomClone > Create HUD Prefabs.
+/// Gắn trên Canvas GameOverScreen trong DoomScene, các ô bên dưới kéo thả trong Inspector.
 /// </summary>
 public class GameOverUI : MonoBehaviour
 {
@@ -25,6 +24,8 @@ public class GameOverUI : MonoBehaviour
     public TextMeshProUGUI rankValue;
     public Button retryButton;
     public Button menuButton;
+    public Color bestColor = new Color32(0x8A, 0xA4, 0xAB, 0xFF);
+    public Color newRecordColor = new Color32(0xF2, 0xC2, 0x30, 0xFF);
 
     ScoreManager score;
     float shownAt = -1f;
@@ -56,7 +57,7 @@ public class GameOverUI : MonoBehaviour
         if (bestValue)
         {
             bestValue.text = score.BestScore.ToString("N0");
-            bestValue.color = score.IsNewBest ? UIFactory.Hazard : UIFactory.Muted;
+            bestValue.color = score.IsNewBest ? newRecordColor : bestColor;
         }
         if (killsValue) killsValue.text = score.Kills.ToString();
         if (timeValue)

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// HUD điểm (góc trên trái) + style meter kiểu DMC / ULTRAKILL (bên phải) + thông báo đợt enemy.
-/// Gắn trên prefab Resources/UI/StyleHUD, các ô bên dưới kéo thả trong Inspector.
-/// Tạo lại prefab: Tools > DoomClone > Create HUD Prefabs.
+/// Gắn trên Canvas StyleHUD trong DoomScene, các ô bên dưới kéo thả trong Inspector.
 /// </summary>
 public class StyleMeterHUD : MonoBehaviour
 {
@@ -35,6 +34,8 @@ public class StyleMeterHUD : MonoBehaviour
     public float feedFade = 0.6f;
     public float shakePerRank = 2.2f;       // từ S trở lên chữ rank rung
     public float waveBannerTime = 2.2f;
+    public Color bonusColor = new Color32(0xE3, 0xEE, 0xF0, 0xFF);
+    public Color damageColor = new Color32(0xFF, 0x5A, 0x4F, 0xFF);
 
     struct FeedItem
     {
@@ -111,7 +112,7 @@ public class StyleMeterHUD : MonoBehaviour
         if (rank < 0) return;
 
         var info = ScoreManager.Ranks[rank];
-        Color c = Color.Lerp(info.color, UIFactory.Hurt, flash);
+        Color c = Color.Lerp(info.color, damageColor, flash);
 
         if (letterText) { letterText.text = info.letter; letterText.color = c; }
         if (letterShadow) letterShadow.text = info.letter;
@@ -148,7 +149,7 @@ public class StyleMeterHUD : MonoBehaviour
             }
 
             var item = feed[feed.Count - 1 - i];   // mới nhất ở trên
-            Color c = item.positive ? UIFactory.Fg : UIFactory.Hurt;
+            Color c = item.positive ? bonusColor : damageColor;
             c.a = Mathf.Clamp01((feedLifetime - (now - item.time)) / feedFade);
             t.color = c;
             t.text = (item.positive ? "+ " : "- ") + item.text;
