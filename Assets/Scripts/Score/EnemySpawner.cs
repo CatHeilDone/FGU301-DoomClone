@@ -93,6 +93,14 @@ public class EnemySpawner : MonoBehaviour
             StartWave();
     }
 
+    /// <summary>Khi load ván đang dở: đợt tiếp theo nối tiếp số đợt đã lưu và tới sau vài giây.</summary>
+    public void RestoreWave(int wave)
+    {
+        Wave = Mathf.Max(0, wave);
+        waveClearedAwarded = true;
+        nextWaveTime = Time.time + clearedWaveDelay * 2f;
+    }
+
     void StartWave()
     {
         Wave++;

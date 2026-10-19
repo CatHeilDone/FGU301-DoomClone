@@ -86,12 +86,22 @@ public class ScoreManager : MonoBehaviour
     Transform player;
     PlayerHealth playerHealth;
 
-    string BestKey => BestKeyFor(AuthService.IsLoggedIn ? AuthService.CurrentUser : null);
+    /// <summary>File lưu sau khi ván kết thúc (null khi đang chơi).</summary>
+    public PlayerSave LastSave { get; private set; }
+    /// <summary>false nếu ghi file lưu bị lỗi.</summary>
+    public bool RunSaved { get; private set; }
+
+    /// <summary>true nếu ván này được chơi tiếp từ bản lưu giữa ván.</summary>
+    public bool LoadedFromSave { get; private set; }
+
+    static string CurrentUser => SaveSystem.CurrentUser;
+
+    string BestKey => BestKeyFor(CurrentUser);
 
     static string BestKeyFor(string user) => "best_score_" + (string.IsNullOrEmpty(user) ? "guest" : user);
 
     /// <summary>Kỷ lục đã lưu của một tài khoản, dùng cho Main Menu.</summary>
-    public static int GetBestScore(string user) => PlayerPrefs.GetInt(BestKeyFor(user), 0);
+    public static int GetBestScore(string user) => SaveSystem.Load(user).bestScore;
 
     /// <summary>12,450 — luôn dùng dấu phẩy, không phụ thuộc ngôn ngữ của máy.</summary>
     public static string FormatScore(int value) => value.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
@@ -99,7 +109,7 @@ public class ScoreManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        BestScore = PlayerPrefs.GetInt(BestKey, 0);
+        BestScore = SaveSystem.Load(CurrentUser).bestScore;
     }
 
     void OnDestroy()
@@ -194,15 +204,40 @@ public class ScoreManager : MonoBehaviour
         if (IsGameOver) return;
         IsGameOver = true;
 
-        if (Score > BestScore)
+        var run = new RunRecord
         {
-            BestScore = Score;
-            IsNewBest = true;
-            PlayerPrefs.SetInt(BestKey, BestScore);
-            PlayerPrefs.Save();
-        }
+            date = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
+            score = Score,
+            kills = Kills,
+            timeAlive = TimeAlive,
+            wave = EnemySpawner.Instance ? EnemySpawner.Instance.Wave : 0,
+            maxRank = HighestRank,
+        };
+        RunSaved = SaveSystem.RecordRun(CurrentUser, run, out var save, LoadedFromSave);
+        LastSave = save;
+        IsNewBest = run.newBest;
+        BestScore = save.bestScore;
+
+        // Giữ PlayerPrefs để bản build cũ vẫn đọc được kỷ lục
+        PlayerPrefs.SetInt(BestKey, BestScore);
+        PlayerPrefs.Save();
 
         GameOver?.Invoke();
+    }
+
+    /// <summary>Khôi phục điểm khi load ván đang dở.</summary>
+    public void RestoreRun(SavedRun run)
+    {
+        Score = run.score;
+        Kills = run.kills;
+        TimeAlive = run.timeAlive;
+        Style = Mathf.Clamp(run.style, 0f, Ranks.Length * pointsPerRank);
+        HighestRank = Mathf.Max(HighestRank, run.highestRank);
+        Combo = 0;
+        lastKillTime = -999f;
+        LoadedFromSave = true;
+        CheckRank();
+        ScoreChanged?.Invoke();
     }
 
     void AddStyle(float amount, string label = null)

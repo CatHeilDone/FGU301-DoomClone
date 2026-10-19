@@ -39,6 +39,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.IsPaused) return;
         if (Input.GetMouseButtonDown(0) && Time.time > nextTimeForFire && ammo > 0)
         {
             Fire();
@@ -115,6 +116,13 @@ public class Gun : MonoBehaviour
 
         ammo = Mathf.Min(ammo + amount, maxAmmo);
         Destroy(pickup);
+        CanvasManager.Instance.UpdateAmmo(ammo);
+    }
+
+    // Dùng khi load ván đã lưu
+    public void SetAmmo(int value)
+    {
+        ammo = Mathf.Clamp(value, 0, maxAmmo);
         CanvasManager.Instance.UpdateAmmo(ammo);
     }
 

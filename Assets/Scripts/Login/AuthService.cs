@@ -24,22 +24,22 @@ public static class AuthService
 
         if (username.Length < 3)
         {
-            error = "Tên đăng nhập phải có ít nhất 3 ký tự.";
+            error = "Username must be at least 3 characters.";
             return false;
         }
         if (password.Length < 6)
         {
-            error = "Mật khẩu phải có ít nhất 6 ký tự.";
+            error = "Password must be at least 6 characters.";
             return false;
         }
         if (password != confirm)
         {
-            error = "Mật khẩu nhập lại không khớp.";
+            error = "Passwords do not match.";
             return false;
         }
         if (PlayerPrefs.HasKey(AccountPrefix + username))
         {
-            error = "Tên đăng nhập đã tồn tại.";
+            error = "That username is already taken.";
             return false;
         }
 
@@ -59,14 +59,14 @@ public static class AuthService
 
         if (!PlayerPrefs.HasKey(key))
         {
-            error = "Tài khoản không tồn tại.";
+            error = "No account with that username.";
             return false;
         }
 
         string[] parts = PlayerPrefs.GetString(key).Split(':');
         if (parts.Length != 2 || Hash(password, parts[0]) != parts[1])
         {
-            error = "Sai mật khẩu.";
+            error = "Wrong password.";
             return false;
         }
 

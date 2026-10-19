@@ -24,6 +24,9 @@ public class GameOverUI : MonoBehaviour
     public TextMeshProUGUI rankValue;
     public Button retryButton;
     public Button menuButton;
+    public TextMeshProUGUI savedText;       // "RUN SAVED · GAME #12 ..." (tùy chọn)
+    public Color savedColor = new Color32(0x8A, 0xA4, 0xAB, 0xFF);
+    public Color saveErrorColor = new Color32(0xFF, 0x5A, 0x4F, 0xFF);
     public Color bestColor = new Color32(0x8A, 0xA4, 0xAB, 0xFF);
     public Color newRecordColor = new Color32(0xF2, 0xC2, 0x30, 0xFF);
 
@@ -79,6 +82,20 @@ public class GameOverUI : MonoBehaviour
             }
         }
         if (newRecord) newRecord.SetActive(score.IsNewBest);
+        if (savedText)
+        {
+            var save = score.LastSave;
+            if (score.RunSaved && save != null)
+            {
+                savedText.text = "RUN SAVED  ·  GAME #" + save.gamesPlayed + "  ·  " + ScoreManager.FormatScore(save.totalKills) + " TOTAL KILLS";
+                savedText.color = savedColor;
+            }
+            else
+            {
+                savedText.text = "COULD NOT SAVE THIS RUN";
+                savedText.color = saveErrorColor;
+            }
+        }
 
         if (panel)
         {

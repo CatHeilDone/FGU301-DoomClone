@@ -13,6 +13,8 @@ public class PlayerHealth : MonoBehaviour
 
     public bool IsDead => isDead;
     public float HealthPercent => maxHealth > 0 ? (float)health / maxHealth : 0f;
+    public int Health => health;
+    public int Armor => armor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +23,15 @@ public class PlayerHealth : MonoBehaviour
         armor = maxArmor;
         CanvasManager.Instance.UpdateHealth(health);
         CanvasManager.Instance.UpdateArmor(armor); // trước đây gọi nhầm UpdateHealth(armor)
+    }
+
+    // Dùng khi load ván đã lưu
+    public void SetStats(int newHealth, int newArmor)
+    {
+        health = Mathf.Clamp(newHealth, 1, maxHealth);
+        armor = Mathf.Clamp(newArmor, 0, maxArmor);
+        CanvasManager.Instance.UpdateHealth(health);
+        CanvasManager.Instance.UpdateArmor(armor);
     }
 
     public void DamagePlayer(int damage)

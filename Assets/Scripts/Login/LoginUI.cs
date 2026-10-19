@@ -85,7 +85,7 @@ public class LoginUI : MonoBehaviour
             loginUser.text = signUpUser.text;
             loginPass.text = "";
             ShowLogin();
-            loginMessage.text = "Tạo tài khoản thành công. Hãy đăng nhập.";
+            loginMessage.text = "Account created. You can log in now.";
         }
         else
         {
