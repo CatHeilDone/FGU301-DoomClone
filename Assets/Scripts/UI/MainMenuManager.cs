@@ -45,7 +45,10 @@ public class MainMenuManager : MonoBehaviour
         if (continueInfo && save.hasSavedRun)
         {
             var run = save.savedRun;
-            continueInfo.text = "WAVE " + run.wave + "  ·  " + ScoreManager.FormatScore(run.score) + " PTS  ·  " + run.date;
+            // "2026-10-19 14:32" -> "19/10 14:32" cho vừa một dòng
+            string when = System.DateTime.TryParseExact(run.date, "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out var d) ? d.ToString("dd/MM HH:mm") : run.date;
+            continueInfo.text = "WAVE " + run.wave + "  ·  " + ScoreManager.FormatScore(run.score) + " PTS  ·  " + when;
         }
     }
 
