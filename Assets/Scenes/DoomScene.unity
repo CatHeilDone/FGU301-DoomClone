@@ -7016,6 +7016,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueKeycardPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 7482494961534803758, guid: 5c91f984f495bfe4c902e5d53257c511, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
