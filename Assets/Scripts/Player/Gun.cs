@@ -19,6 +19,10 @@ public class Gun : MonoBehaviour
 
     public float gunShotRadius = 20f;
 
+    [Header("Ngắm bắn")]
+    [Tooltip("Độ dễ tính khi ngắm (mét). Tăng nếu khó bắn trúng, giảm nếu bắn trúng quá dễ.")]
+    public float aimTolerance = 0.3f;
+
     private float nextTimeForFire;
     public EnemyManager enemyManager;
     public LayerMask raycastLayerMask;
@@ -60,25 +64,32 @@ public class Gun : MonoBehaviour
         SpawnWaterBall();
         if (weaponVisual)
             weaponVisual.PlayRecoil();
+        if (!cam) cam = Camera.main;
+
+        // Raycast
+        Ray aimRay = new Ray(cam.transform.position, cam.transform.forward);
+        float maxDist = range * 1.5f;
+
         foreach (var enemy in enemyManager.enemiesInTrigger)
         {
-            var dir = enemy.transform.position - transform.position;
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, dir, out hit, range * 1.5f, raycastLayerMask))
-            {
-                if (hit.transform == enemy.transform)
-                {
-                    float dist = Vector3.Distance(enemy.transform.position, transform.position);
+            var col = enemy.GetComponent<Collider>();
+            if (!col || !col.enabled) continue;
 
-                    if (dist > range * 0.5f)
-                    {
-                        enemy.TakeDamage(smallDamage);
-                    }
-                    else
-                    {
-                        enemy.TakeDamage(bigDamage);
-                    }
-                }
+            // 1) Tia ngắm có đi qua enemy không? Bắn lên trời / xuống đất thì tia trượt -> không sát thương
+            Bounds aimBounds = col.bounds;
+            aimBounds.Expand(aimTolerance * 2f);
+            if (!aimBounds.IntersectRay(aimRay, out float enter) || enter > maxDist)
+                continue;
+
+            // 2) Giữa camera và enemy không có tường chắn
+            Vector3 dir = col.bounds.center - aimRay.origin;
+            if (Physics.Raycast(aimRay.origin, dir, out RaycastHit hit, maxDist, raycastLayerMask)
+                && hit.collider.GetComponentInParent<Enemy>() == enemy)
+            {
+                if (hit.distance > range * 0.5f)
+                    enemy.TakeDamage(smallDamage);
+                else
+                    enemy.TakeDamage(bigDamage);
             }
         }
 
@@ -106,7 +117,11 @@ public class Gun : MonoBehaviour
             : ray.GetPoint(range * 1.5f);
 
         Vector3 dir = (target - muzzle.position).normalized;
-        Instantiate(waterBallPrefab, muzzle.position, Quaternion.LookRotation(dir));
+        var ball = Instantiate(waterBallPrefab, muzzle.position, Quaternion.LookRotation(dir));
+
+        // Viên nước chỉ bay tới điểm đang ngắm rồi biến mất (khớp với chỗ tia sát thương trúng)
+        var waterBall = ball.GetComponent<WaterBall>();
+        if (waterBall) waterBall.maxDistance = Vector3.Distance(muzzle.position, target);
     }
 
     public void GiveAmmo(int amount, GameObject pickup)

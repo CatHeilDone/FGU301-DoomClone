@@ -5224,11 +5224,12 @@ MonoBehaviour:
   bigDamage: 2
   smallDamage: 1
   maxAmmo: 100
-  ammo: 50
+  ammo: 100
   weaponVisual: {fileID: 634865448}
   muzzle: {fileID: 1256330084}
   waterBallPrefab: {fileID: 103346297523453539, guid: dc05d560bdb6aa64a922fe60c451e197, type: 3}
   gunShotRadius: 20
+  aimTolerance: 0.3
   enemyManager: {fileID: 403082737}
   raycastLayerMask:
     serializedVersion: 2

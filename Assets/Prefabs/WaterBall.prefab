@@ -109,3 +109,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   splashPrefab: {fileID: 0}
+  maxDistance: Infinity
