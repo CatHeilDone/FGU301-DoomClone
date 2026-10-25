@@ -2,20 +2,23 @@ using UnityEngine;
 
 public class EnemyAwareness : MonoBehaviour
 {
-    public float awarenessRadius = 8f;
+    public float closeSenseRadius = 2f;   // MỚI (thay awarenessRadius): đứng sát enemy thì luôn bị phát hiện, kể cả khi cúi
     public bool isAggro;
     private Transform playersTransform;
+    private PlayerMove playerMove;        // MỚI: để đọc NoiseRadius
 
     private void Start()
     {
-        playersTransform = FindObjectOfType<PlayerMove>().transform;
+        playerMove = FindObjectOfType<PlayerMove>();   // MỚI
+        playersTransform = playerMove.transform;
     }
 
     private void Update()
     {
         var dist = Vector3.Distance(transform.position, playersTransform.position);
 
-        if (dist < awarenessRadius)
+        // MỚI: enemy nghe thấy khi Player ồn hơn khoảng cách, hoặc Player đứng quá sát
+        if (dist < playerMove.NoiseRadius || dist < closeSenseRadius)
         {
             isAggro = true;
         }
