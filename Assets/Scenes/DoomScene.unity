@@ -1153,7 +1153,7 @@ Transform:
   m_GameObject: {fileID: 192112502}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.19928849, z: -0, w: 0.9799409}
-  m_LocalPosition: {x: 14.07, y: 7.7, z: 299}
+  m_LocalPosition: {x: 15.62, y: 0.08, z: 274.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5812,7 +5812,7 @@ MonoBehaviour:
   enemyManager: {fileID: 403082737}
   raycastLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 193
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -8175,7 +8175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8127494951569888822, guid: 1ffe0dd2be935fe47922cf8b4e8dd564, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.21000999
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 8127494951569888822, guid: 1ffe0dd2be935fe47922cf8b4e8dd564, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12095,7 +12095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658837974760567950, guid: 09068d3ab8d61824493f7d8bdb5be5ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.21000999
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8658837974760567950, guid: 09068d3ab8d61824493f7d8bdb5be5ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16369,6 +16369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1495025230}
   - component: {fileID: 1495025231}
+  - component: {fileID: 1495025232}
   m_Layer: 7
   m_Name: Boss_BaKhi
   m_TagString: Untagged
@@ -16404,11 +16405,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb387316d270c04180d99a49505eacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
-  maxHealth: 200
-  currentHealth: 200
+  maxHealth: 20
+  currentHealth: 20
   weakPointBreakBonus: 0.08
   brokenDuration: 8
   brokenDamageMultiplier: 2
+--- !u!114 &1495025232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495025229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f8ff6779866684daa37137eae1a539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossController
+  player: {fileID: 192112506}
+  activationRange: 25
+  startDelay: 2
+  turnSpeed: 40
+  canTurn: 1
+  hoverHeight: 5.5
+  bobAmplitude: 0.3
+  bobSpeed: 1.2
+  attackInterval: 5
+  attackIntervalPhase2: 4
+  eyeL: {fileID: 0}
+  eyeR: {fileID: 0}
+  warningMaterial: {fileID: 2100000, guid: 57be70bfecf9fe8408c7a5e1d0030c87, type: 2}
+  beamMaterial: {fileID: 2100000, guid: 98036caf0b4ee91428a045ac1228ea71, type: 2}
+  eyeGlowColor: {r: 1, g: 0.2, b: 0.2, a: 1}
+  laserChargeTime: 1.5
+  laserLockTime: 0.8
+  laserMask:
+    serializedVersion: 2
+    m_Bits: 1
+  laserMaxLength: 60
+  eyeHitsToInterrupt: 1
+  interruptStunTime: 1.5
+  laserFireTime: 0.7
+  laserDamage: 40
+  laserRadius: 0.4
+  model: {fileID: 0}
+  verticalTiltAngle: 25
+  verticalSweepTime: 0.6
+  verticalSweepFrom: -20
+  verticalSweepTo: 70
+  verticalBeamRadius: 0.6
+  verticalDamage: 25
+  verticalWarnLength: 40
+  stompRadius: 12
+  stompRiseHeight: 3
+  stompRiseTime: 1.2
+  stompFallTime: 0.3
+  landedHeight: 3.1
+  shockwaveTime: 0.5
+  stompDamage: 10
+  playerStunTime: 1.5
+  stompRecoverTime: 2.5
+  stompReturnTime: 1
+  currentAction: "Ch\u1EDD"
 --- !u!1 &1502651867
 GameObject:
   m_ObjectHideFlags: 0
