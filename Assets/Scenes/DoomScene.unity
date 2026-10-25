@@ -1153,7 +1153,7 @@ Transform:
   m_GameObject: {fileID: 192112502}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.19928849, z: -0, w: 0.9799409}
-  m_LocalPosition: {x: 36.2, y: 1, z: 293.32}
+  m_LocalPosition: {x: 14.07, y: 7.7, z: 299}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2735,7 +2735,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -7703,7 +7703,8 @@ GameObject:
   - component: {fileID: 828252108}
   - component: {fileID: 828252107}
   - component: {fileID: 828252106}
-  m_Layer: 0
+  - component: {fileID: 828252109}
+  m_Layer: 7
   m_Name: EyeL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7803,6 +7804,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828252104}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &828252109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828252104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a3680c5bbe2dc44bf01b093638c44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeakPoint
+  kind: 0
+  damageMultiplier: 2.5
+  maxHealth: 15
+  brokenColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+  boss: {fileID: 0}
 --- !u!1 &835264884
 GameObject:
   m_ObjectHideFlags: 0
@@ -8782,7 +8800,8 @@ GameObject:
   - component: {fileID: 931899328}
   - component: {fileID: 931899327}
   - component: {fileID: 931899326}
-  m_Layer: 0
+  - component: {fileID: 931899329}
+  m_Layer: 7
   m_Name: WeakR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8882,6 +8901,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931899324}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &931899329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931899324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a3680c5bbe2dc44bf01b093638c44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeakPoint
+  kind: 1
+  damageMultiplier: 2
+  maxHealth: 20
+  brokenColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+  boss: {fileID: 0}
 --- !u!1 &934226054
 GameObject:
   m_ObjectHideFlags: 0
@@ -10618,7 +10654,8 @@ GameObject:
   - component: {fileID: 1044171350}
   - component: {fileID: 1044171349}
   - component: {fileID: 1044171348}
-  m_Layer: 0
+  - component: {fileID: 1044171351}
+  m_Layer: 7
   m_Name: WeakB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10718,6 +10755,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044171346}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1044171351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044171346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a3680c5bbe2dc44bf01b093638c44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeakPoint
+  kind: 2
+  damageMultiplier: 3
+  maxHealth: 25
+  brokenColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+  boss: {fileID: 0}
 --- !u!1 &1051074505
 GameObject:
   m_ObjectHideFlags: 0
@@ -14766,7 +14820,8 @@ GameObject:
   - component: {fileID: 1392327893}
   - component: {fileID: 1392327892}
   - component: {fileID: 1392327891}
-  m_Layer: 0
+  - component: {fileID: 1392327894}
+  m_Layer: 7
   m_Name: WeakL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14866,6 +14921,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392327889}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1392327894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392327889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a3680c5bbe2dc44bf01b093638c44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeakPoint
+  kind: 1
+  damageMultiplier: 2
+  maxHealth: 20
+  brokenColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+  boss: {fileID: 0}
 --- !u!1001 &1394911440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16296,7 +16368,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1495025230}
-  m_Layer: 0
+  - component: {fileID: 1495025231}
+  m_Layer: 7
   m_Name: Boss_BaKhi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16319,6 +16392,23 @@ Transform:
   - {fileID: 1621253150}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1495025231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495025229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb387316d270c04180d99a49505eacf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealth
+  maxHealth: 200
+  currentHealth: 200
+  weakPointBreakBonus: 0.08
+  brokenDuration: 8
+  brokenDamageMultiplier: 2
 --- !u!1 &1502651867
 GameObject:
   m_ObjectHideFlags: 0
@@ -16787,7 +16877,7 @@ GameObject:
   - component: {fileID: 1526921244}
   - component: {fileID: 1526921243}
   - component: {fileID: 1526921242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17974,7 +18064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1621253150}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19623,7 +19713,8 @@ GameObject:
   - component: {fileID: 1768437489}
   - component: {fileID: 1768437488}
   - component: {fileID: 1768437487}
-  m_Layer: 0
+  - component: {fileID: 1768437490}
+  m_Layer: 7
   m_Name: EyeR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19723,6 +19814,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768437485}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1768437490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768437485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a3680c5bbe2dc44bf01b093638c44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeakPoint
+  kind: 0
+  damageMultiplier: 2.5
+  maxHealth: 15
+  brokenColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+  boss: {fileID: 0}
 --- !u!1 &1787592886
 GameObject:
   m_ObjectHideFlags: 0

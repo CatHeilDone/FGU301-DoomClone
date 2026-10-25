@@ -43,7 +43,8 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenu.IsPaused)
+            return;
         if (Input.GetMouseButtonDown(0) && Time.time > nextTimeForFire && ammo > 0)
         {
             Fire();
@@ -64,7 +65,8 @@ public class Gun : MonoBehaviour
         SpawnWaterBall();
         if (weaponVisual)
             weaponVisual.PlayRecoil();
-        if (!cam) cam = Camera.main;
+        if (!cam)
+            cam = Camera.main;
 
         // Raycast
         Ray aimRay = new Ray(cam.transform.position, cam.transform.forward);
@@ -73,7 +75,8 @@ public class Gun : MonoBehaviour
         foreach (var enemy in enemyManager.enemiesInTrigger)
         {
             var col = enemy.GetComponent<Collider>();
-            if (!col || !col.enabled) continue;
+            if (!col || !col.enabled)
+                continue;
 
             // 1) Tia ngắm có đi qua enemy không? Bắn lên trời / xuống đất thì tia trượt -> không sát thương
             Bounds aimBounds = col.bounds;
@@ -83,8 +86,10 @@ public class Gun : MonoBehaviour
 
             // 2) Giữa camera và enemy không có tường chắn
             Vector3 dir = col.bounds.center - aimRay.origin;
-            if (Physics.Raycast(aimRay.origin, dir, out RaycastHit hit, maxDist, raycastLayerMask)
-                && hit.collider.GetComponentInParent<Enemy>() == enemy)
+            if (
+                Physics.Raycast(aimRay.origin, dir, out RaycastHit hit, maxDist, raycastLayerMask)
+                && hit.collider.GetComponentInParent<Enemy>() == enemy
+            )
             {
                 if (hit.distance > range * 0.5f)
                     enemy.TakeDamage(smallDamage);
@@ -92,11 +97,35 @@ public class Gun : MonoBehaviour
                     enemy.TakeDamage(bigDamage);
             }
         }
+        TryHitBoss(aimRay, maxDist);
 
         nextTimeForFire = Time.time + fireRate;
 
         ammo--;
         CanvasManager.Instance.UpdateAmmo(ammo);
+    }
+
+    void TryHitBoss(Ray aimRay, float maxDist)
+    {
+        if (
+            !Physics.SphereCast(
+                aimRay,
+                aimTolerance,
+                out RaycastHit hit,
+                maxDist,
+                raycastLayerMask,
+                QueryTriggerInteraction.Ignore
+            )
+        )
+            return;
+
+        var boss = hit.collider.GetComponentInParent<BossHealth>();
+        if (!boss)
+            return;
+
+        float dmg = hit.distance > range * 0.5f ? smallDamage : bigDamage;
+        var weak = hit.collider.GetComponent<WeakPoint>();
+        boss.TakeDamage(dmg, weak);
     }
 
     void SpawnWaterBall()
@@ -121,7 +150,8 @@ public class Gun : MonoBehaviour
 
         // Viên nước chỉ bay tới điểm đang ngắm rồi biến mất (khớp với chỗ tia sát thương trúng)
         var waterBall = ball.GetComponent<WaterBall>();
-        if (waterBall) waterBall.maxDistance = Vector3.Distance(muzzle.position, target);
+        if (waterBall)
+            waterBall.maxDistance = Vector3.Distance(muzzle.position, target);
     }
 
     public void GiveAmmo(int amount, GameObject pickup)
