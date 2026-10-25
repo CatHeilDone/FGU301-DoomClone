@@ -107,6 +107,8 @@ public class Gun : MonoBehaviour
 
     void TryHitBoss(Ray aimRay, float maxDist)
     {
+        Debug.Log("[Boss] TryHitBoss được gọi");
+
         if (
             !Physics.SphereCast(
                 aimRay,
@@ -117,11 +119,21 @@ public class Gun : MonoBehaviour
                 QueryTriggerInteraction.Ignore
             )
         )
+        {
+            Debug.Log("[Boss] Tia không trúng collider nào trong Raycast Layer Mask");
             return;
+        }
+
+        Debug.Log(
+            $"[Boss] Tia trúng: {hit.collider.name} (layer {LayerMask.LayerToName(hit.collider.gameObject.layer)})"
+        );
 
         var boss = hit.collider.GetComponentInParent<BossHealth>();
         if (!boss)
+        {
+            Debug.Log("[Boss] Collider này không nằm dưới object có BossHealth");
             return;
+        }
 
         float dmg = hit.distance > range * 0.5f ? smallDamage : bigDamage;
         var weak = hit.collider.GetComponent<WeakPoint>();
