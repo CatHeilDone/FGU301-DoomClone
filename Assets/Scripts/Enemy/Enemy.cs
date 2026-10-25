@@ -92,4 +92,13 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject, 3f);
     }
+
+    public void KillForCheat()
+    {
+        if (isDead)
+            return;
+
+        enemyHealth = 0f;
+        Die();
+    }
 }

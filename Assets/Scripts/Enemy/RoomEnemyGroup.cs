@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class RoomEnemyGroup : MonoBehaviour
 {
+    public static RoomEnemyGroup CurrentRoom { get; private set; }
+
     [Header("Enemies in this room")]
     [SerializeField] private Enemy[] roomEnemies;
 
-    [Header("Guaranteed reward")]
+    [Header("Guaranteed Reward")]
     [SerializeField] private GameObject blueKeyPrefab;
     [SerializeField] private float dropHeight = 0.5f;
 
@@ -30,12 +32,33 @@ public class RoomEnemyGroup : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            CurrentRoom = this;
+            Debug.Log("Entered room: " + name);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && CurrentRoom == this)
+        {
+            CurrentRoom = null;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (CurrentRoom == this)
+            CurrentRoom = null;
+    }
+
     public void NotifyEnemyDied(Enemy enemy, Vector3 deathPosition)
     {
-        if (completed)
-            return;
+        if (completed) return;
 
-        // Chỉ chấp nhận enemy thuộc room này.
         if (!remainingEnemies.Remove(enemy))
             return;
 
@@ -44,25 +67,44 @@ public class RoomEnemyGroup : MonoBehaviour
 
         completed = true;
 
-        // Quái cuối cùng chắc chắn rơi chìa khóa.
         if (blueKeyPrefab != null)
         {
-            Vector3 position =
-                deathPosition + Vector3.up * dropHeight;
-
             Instantiate(
                 blueKeyPrefab,
-                position,
+                deathPosition + Vector3.up * dropHeight,
                 Quaternion.identity
             );
         }
         else
         {
             Debug.LogWarning(
-                $"[{name}] Chưa gán Blue Key Prefab!"
+                "[" + name + "] Blue Key Prefab is missing!"
             );
         }
 
-        Debug.Log($"Room cleared: {name}");
+        Debug.Log("ROOM CLEARED: " + name);
+    }
+
+    // Cheat: chỉ clear các enemy thuộc phòng này.
+    public void CheatClearRoom()
+    {
+        if (completed)
+        {
+            Debug.Log("This room is already cleared.");
+            return;
+        }
+
+        Enemy[] enemies = new Enemy[remainingEnemies.Count];
+        remainingEnemies.CopyTo(enemies);
+
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy != null && !enemy.IsDead)
+            {
+                enemy.KillForCheat();
+            }
+        }
+
+        Debug.Log("CHEAT CLEARROOM executed: " + name);
     }
 }
