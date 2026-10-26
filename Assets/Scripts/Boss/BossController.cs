@@ -79,8 +79,23 @@ public class BossController : MonoBehaviour
     public float stompRecoverTime = 2.5f;
     public float stompReturnTime = 1f;
 
+    [Header("Pha 2 (dưới 50% máu)")]
+    public Color phase2BodyColor = new Color(1f, 0.55f, 0.5f);
+    [Tooltip("Phát laze ngang thứ hai: thời gian gồng ngắn hơn")]
+    public float phase2SecondCharge = 1.1f;
+    public float phase2SecondLock = 0.45f;
+    public float phase2ShotGap = 0.3f;
+
+    [Header("Khi bị hạ")]
+    public float deathFallTime = 1.5f;
+    [Tooltip("Chờ bao lâu sau khi boss nằm xuống thì hiện màn hình YOU WIN")]
+    public float victoryDelay = 1.5f;
+    public Color deadColor = new Color(0.25f, 0.25f, 0.28f);
+
     [Header("Trạng thái (chỉ để xem)")]
     public string currentAction = "Chờ";
+
+    public bool IsActivated => activated;
 
     BossHealth health;
     PlayerHealth playerHealth;
@@ -91,6 +106,7 @@ public class BossController : MonoBehaviour
     Renderer[] eyeRenderers;
     WeakPoint[] eyeWeakPoints;
     Color[] eyeBaseColors;
+    Renderer bodyRenderer;
     LineRenderer[] warningLines;
     LineRenderer[] beamLines;
     LineRenderer floorWarningLine;
@@ -100,9 +116,10 @@ public class BossController : MonoBehaviour
 
     bool charging;
     int chargeHits;
+    bool laserInterrupted;
 
     // Bay lơ lửng
-    float heightOffset;          // độ lệch thêm do đòn dậm đất
+    float heightOffset;          // độ lệch thêm do đòn dậm đất / lúc chết
     bool bobbing = true;
     float bobScale = 1f;
     float modelBaseX, modelBaseZ;
@@ -166,6 +183,9 @@ public class BossController : MonoBehaviour
 
         if (!warningMaterial || !beamMaterial)
             Debug.LogWarning("[Boss] Chưa gán Warning Material / Beam Material cho BossController");
+
+        var body = transform.Find("Model/Body");
+        if (body) bodyRenderer = body.GetComponent<Renderer>();
 
         for (int i = 0; i < 2; i++)
         {
@@ -284,7 +304,24 @@ public class BossController : MonoBehaviour
 
     // ================= LAZE NGANG =================
 
+    // Pha 1: một phát. Pha 2: hai phát liên tiếp (phát thứ hai gồng ngắn hơn)
     IEnumerator LaserHorizontal()
+    {
+        int shots = health.IsPhase2 ? 2 : 1;
+        for (int i = 0; i < shots; i++)
+        {
+            laserInterrupted = false;
+            float charge = (i == 0) ? laserChargeTime : phase2SecondCharge;
+            float lockT = (i == 0) ? laserLockTime : phase2SecondLock;
+
+            yield return StartCoroutine(LaserShot(charge, lockT));
+
+            if (laserInterrupted) yield break;   // bị ngắt thì hủy luôn phát còn lại
+            if (i < shots - 1) yield return new WaitForSeconds(phase2ShotGap);
+        }
+    }
+
+    IEnumerator LaserShot(float chargeTime, float lockTime)
     {
         currentAction = "Laze ngang: gồng";
         charging = true;
@@ -294,15 +331,15 @@ public class BossController : MonoBehaviour
         bool locked = false;
         float t = 0f;
 
-        while (t < laserChargeTime)
+        while (t < chargeTime)
         {
             t += Time.deltaTime;
-            SetEyeGlow(t / laserChargeTime);
+            SetEyeGlow(t / chargeTime);
 
             if (!locked)
             {
                 aimPoint = player.position;
-                if (t >= laserLockTime)
+                if (t >= lockTime)
                 {
                     locked = true;
                     canTurn = false;
@@ -313,6 +350,7 @@ public class BossController : MonoBehaviour
 
             if (chargeHits >= eyeHitsToInterrupt)
             {
+                laserInterrupted = true;
                 yield return StartCoroutine(InterruptLaser());
                 yield break;
             }
@@ -331,7 +369,7 @@ public class BossController : MonoBehaviour
             bool touchedPlayer = DrawLines(beamLines, aimPoint);
             if (touchedPlayer && !alreadyHit)
             {
-                alreadyHit = true;   // mỗi đòn chỉ gây sát thương một lần
+                alreadyHit = true;   // mỗi phát chỉ gây sát thương một lần
                 if (playerHealth) playerHealth.DamagePlayer(laserDamage);
             }
             yield return null;
@@ -672,6 +710,21 @@ public class BossController : MonoBehaviour
     void HandlePhase2()
     {
         Debug.Log("[Boss] Vào pha 2");
+        StartCoroutine(TintBody(phase2BodyColor, 1f));
+    }
+
+    IEnumerator TintBody(Color target, float duration)
+    {
+        if (!bodyRenderer) yield break;
+        Color from = bodyRenderer.material.color;
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            bodyRenderer.material.color = Color.Lerp(from, target, t / duration);
+            yield return null;
+        }
+        bodyRenderer.material.color = target;
     }
 
     void HandleDied()
@@ -683,12 +736,39 @@ public class BossController : MonoBehaviour
         HideLine(stompWarnLine);
         HideLine(shockwaveLine);
         SetHeadTilt(0f);
-        ResetEyes();
         if (playerMove) playerMove.enabled = true;   // dừng choáng nếu boss chết giữa chừng
-        heightOffset = 0f;
-        bobbing = true;
         canTurn = false;
         currentAction = "Đã bị hạ";
+        StartCoroutine(DeathSequence());
+    }
+
+    // Boss rơi xuống sàn, tối màu, rồi hiện màn hình chiến thắng
+    IEnumerator DeathSequence()
+    {
+        bobbing = false;
+
+        // tắt mắt và tối màu thân
+        if (eyeRenderers != null)
+            foreach (var r in eyeRenderers)
+                if (r) r.material.color = deadColor;
+        if (bodyRenderer) bodyRenderer.material.color = deadColor;
+
+        float floorY = FloorY();
+        float landOffset = landedHeight + (floorY - transform.position.y) - hoverHeight;
+        float startOffset = heightOffset;
+        float t = 0f;
+        while (t < deathFallTime)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.Clamp01(t / deathFallTime);
+            heightOffset = Mathf.Lerp(startOffset, landOffset, k * k);
+            yield return null;
+        }
+        heightOffset = landOffset;
+
+        yield return new WaitForSeconds(victoryDelay);
+
+        if (ScoreManager.Instance) ScoreManager.Instance.TriggerVictory();
     }
 
     void OnDrawGizmosSelected()

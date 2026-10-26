@@ -1431,7 +1431,7 @@ Transform:
   m_GameObject: {fileID: 192112502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.9, y: 0.08, z: 10.5}
+  m_LocalPosition: {x: -16.9, y: 0.08, z: 134.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14476,6 +14476,7 @@ MonoBehaviour:
   saveErrorColor: {r: 0.8784314, g: 0.4, b: 0.4, a: 1}
   bestColor: {r: 0.6039216, g: 0.6156863, b: 0.63529414, a: 1}
   newRecordColor: {r: 0.9490196, g: 0.7607843, b: 0.1882353, a: 1}
+  winColor: {r: 0.9490196, g: 0.7607843, b: 0.1882353, a: 1}
 --- !u!114 &1206258429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18749,6 +18750,7 @@ GameObject:
   - component: {fileID: 1495025230}
   - component: {fileID: 1495025231}
   - component: {fileID: 1495025232}
+  - component: {fileID: 1495025233}
   m_Layer: 7
   m_Name: Boss_BaKhi
   m_TagString: Untagged
@@ -18845,7 +18847,37 @@ MonoBehaviour:
   playerStunTime: 1.5
   stompRecoverTime: 2.5
   stompReturnTime: 1
+  phase2BodyColor: {r: 1, g: 0.55, b: 0.5, a: 1}
+  phase2SecondCharge: 1.1
+  phase2SecondLock: 0.45
+  phase2ShotGap: 0.3
+  deathFallTime: 1.5
+  victoryDelay: 1.5
+  deadColor: {r: 0.25, g: 0.25, b: 0.28, a: 1}
   currentAction: "Ch\u1EDD"
+--- !u!114 &1495025233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495025229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407cdb5e24dfb794981cebce0c9c6d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealthBar
+  bossName: SIEU CAP BA KHI
+  fontAsset: {fileID: 0}
+  barWidth: 720
+  barHeight: 28
+  topMargin: 36
+  fillColor: {r: 0.3, g: 0.85, b: 1, a: 1}
+  phase2Color: {r: 1, g: 0.4, b: 0.3, a: 1}
+  brokenColor: {r: 1, g: 0.95, b: 0.4, a: 1}
+  trailColor: {r: 1, g: 1, b: 1, a: 0.85}
+  fillSpeed: 4
+  trailSpeed: 0.25
 --- !u!1 &1502651867
 GameObject:
   m_ObjectHideFlags: 0
