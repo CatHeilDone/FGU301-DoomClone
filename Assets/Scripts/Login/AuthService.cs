@@ -1,138 +1,199 @@
 using System;
-using System.Security.Cryptography;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Đăng ký / đăng nhập lưu cục bộ bằng PlayerPrefs.
-/// Mật khẩu được băm (PBKDF2 + salt), không lưu dạng chữ thường.
-/// Lưu ý: chỉ phù hợp game offline / prototype. Muốn tài khoản online
-/// hãy dùng Unity Authentication, Firebase hoặc PlayFab.
+/// Đăng ký / đăng nhập bằng Firebase Authentication (email + mật khẩu).
+/// Người chơi vẫn gõ tên đăng nhập như cũ; tên được đổi thành email
+/// "&lt;tên&gt;@&lt;usernameDomain&gt;" trước khi gửi lên Firebase. Gõ thẳng một email cũng được.
+/// Sau khi đăng nhập, save trên cloud được tải về (CloudSaveSync) rồi mới báo thành công.
 /// </summary>
 public static class AuthService
 {
-    const string AccountPrefix = "account_";
     const string LastUserKey = "last_user";
-    const string RememberKey = "remember_user";
-    const int HashIterations = 10000;
+    const string RememberUserKey = "remember_user";
+    const string RefreshTokenKey = "fb_refresh_token";
 
+    /// <summary>Tên đăng nhập (chữ thường), dùng làm tên file save trên máy.</summary>
     public static string CurrentUser { get; private set; }
     public static bool IsLoggedIn => !string.IsNullOrEmpty(CurrentUser);
 
-    public static bool Register(string username, string password, string confirm, out string error)
+    /// <summary>Có phiên Firebase hợp lệ (uid + token) để gọi Firestore.</summary>
+    public static bool IsOnline => IsLoggedIn && !string.IsNullOrEmpty(Uid) && !string.IsNullOrEmpty(refreshToken);
+
+    public static string Uid { get; private set; }
+    public static string IdToken { get; private set; }
+    static string refreshToken;
+    static DateTime tokenExpiresUtc;
+
+    // ---------- Đăng ký ----------
+
+    /// <summary>done(ok, error). Đăng ký xong không tự đăng nhập, giống bản cũ.</summary>
+    public static void Register(string username, string password, string confirm, Action<bool, string> done)
     {
         username = Normalize(username);
+        string error = ValidateUsername(username);
+        if (error == null && password.Length < 6) error = "Password must be at least 6 characters.";
+        if (error == null && password != confirm) error = "Passwords do not match.";
+        if (error != null) { done(false, error); return; }
 
-        if (username.Length < 3)
-        {
-            error = "Username must be at least 3 characters.";
-            return false;
-        }
-        if (password.Length < 6)
-        {
-            error = "Password must be at least 6 characters.";
-            return false;
-        }
-        if (password != confirm)
-        {
-            error = "Passwords do not match.";
-            return false;
-        }
-        if (PlayerPrefs.HasKey(AccountPrefix + username))
-        {
-            error = "That username is already taken.";
-            return false;
-        }
-
-        string salt = GenerateSalt();
-        string hash = Hash(password, salt);
-        PlayerPrefs.SetString(AccountPrefix + username, salt + ":" + hash);
-        PlayerPrefs.Save();
-
-        error = null;
-        return true;
+        FirebaseRunner.Run(FirebaseAuthClient.SignUp(ToEmail(username), password,
+            (session, err) => done(session != null, err)));
     }
 
-    public static bool Login(string username, string password, out string error)
+    // ---------- Đăng nhập ----------
+
+    /// <summary>done(ok, message): khi ok, message có thể là cảnh báo (vd. không đồng bộ được cloud).</summary>
+    public static void Login(string username, string password, Action<bool, string> done)
     {
         username = Normalize(username);
-        string key = AccountPrefix + username;
+        if (username.Length == 0 || password.Length == 0) { done(false, "Enter your username and password."); return; }
 
-        if (!PlayerPrefs.HasKey(key))
-        {
-            error = "No account with that username.";
-            return false;
-        }
+        FirebaseRunner.Run(LoginRoutine(username, password, done));
+    }
 
-        string[] parts = PlayerPrefs.GetString(key).Split(':');
-        if (parts.Length != 2 || Hash(password, parts[0]) != parts[1])
-        {
-            error = "Wrong password.";
-            return false;
-        }
+    static IEnumerator LoginRoutine(string username, string password, Action<bool, string> done)
+    {
+        FirebaseAuthClient.Session session = null; string error = null;
+        yield return FirebaseAuthClient.SignIn(ToEmail(username), password, (s, e) => { session = s; error = e; });
+        if (session == null) { done(false, error); yield break; }
 
-        CurrentUser = username;
+        StartSession(username, session);
         PlayerPrefs.SetString(LastUserKey, username);
         PlayerPrefs.Save();
 
-        error = null;
-        return true;
+        string warning = null;
+        yield return CloudSaveSync.PullOnLogin(username, w => warning = w);
+        done(true, warning);
     }
 
     /// <summary>
     /// Gọi ngay sau khi đăng nhập thành công.
-    /// Bật: nhớ tài khoản cho lần mở game sau. Tắt: xóa ghi nhớ.
+    /// Bật: lưu refresh token để lần sau tự đăng nhập. Tắt: xoá.
     /// </summary>
     public static void SetRememberMe(bool remember)
     {
-        if (remember && IsLoggedIn)
-            PlayerPrefs.SetString(RememberKey, CurrentUser);
+        if (remember && IsOnline)
+        {
+            PlayerPrefs.SetString(RememberUserKey, CurrentUser);
+            PlayerPrefs.SetString(RefreshTokenKey, refreshToken);
+        }
         else
-            PlayerPrefs.DeleteKey(RememberKey);
-
+        {
+            PlayerPrefs.DeleteKey(RememberUserKey);
+            PlayerPrefs.DeleteKey(RefreshTokenKey);
+        }
         PlayerPrefs.Save();
     }
 
     /// <summary>
-    /// Tự đăng nhập bằng tài khoản đã được ghi nhớ. Trả về true nếu thành công.
+    /// Tự đăng nhập bằng phiên đã ghi nhớ. done(ok, message):
+    /// message có nội dung khi phiên đã hỏng (đã bị xoá) hoặc mất mạng.
     /// </summary>
-    public static bool TryAutoLogin()
+    public static void TryAutoLogin(Action<bool, string> done)
     {
-        if (IsLoggedIn) return true;
+        if (IsLoggedIn) { done(true, null); return; }
 
-        string saved = PlayerPrefs.GetString(RememberKey, "");
-        if (string.IsNullOrEmpty(saved) || !PlayerPrefs.HasKey(AccountPrefix + saved))
-            return false;
+        string user = PlayerPrefs.GetString(RememberUserKey, "");
+        string token = PlayerPrefs.GetString(RefreshTokenKey, "");
+        if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(token)) { done(false, null); return; }
 
-        CurrentUser = saved;
-        return true;
+        FirebaseRunner.Run(AutoLoginRoutine(user, token, done));
+    }
+
+    static IEnumerator AutoLoginRoutine(string user, string token, Action<bool, string> done)
+    {
+        FirebaseAuthClient.Session session = null; string error = null; bool temporary = false;
+        yield return FirebaseAuthClient.Refresh(token, (s, e, t) => { session = s; error = e; temporary = t; });
+        if (session == null)
+        {
+            // Mất mạng: giữ phiên để lần mở game sau thử lại.
+            // Phiên hỏng (đổi mật khẩu, tài khoản bị xoá / khoá): xoá để không thử mãi.
+            if (!temporary) ForgetRememberedSession();
+            done(false, temporary ? error : "Your session has expired. Please log in again.");
+            yield break;
+        }
+
+        StartSession(user, session);
+        PlayerPrefs.SetString(RefreshTokenKey, refreshToken);   // Firebase có thể cấp refresh token mới
+        PlayerPrefs.Save();
+
+        yield return CloudSaveSync.PullOnLogin(user, w => { });
+        done(true, null);
     }
 
     public static void Logout()
     {
         CurrentUser = null;
+        Uid = null;
+        IdToken = null;
+        refreshToken = null;
 
-        // Xóa ghi nhớ, nếu không màn hình Login sẽ tự đăng nhập lại ngay.
-        PlayerPrefs.DeleteKey(RememberKey);
+        // Xoá ghi nhớ, nếu không màn hình Login sẽ tự đăng nhập lại ngay
+        ForgetRememberedSession();
+    }
+
+    static void ForgetRememberedSession()
+    {
+        PlayerPrefs.DeleteKey(RememberUserKey);
+        PlayerPrefs.DeleteKey(RefreshTokenKey);
         PlayerPrefs.Save();
     }
 
-    static string Normalize(string username)
+    // ---------- Token ----------
+
+    /// <summary>Id token chỉ sống 1 giờ: làm mới nếu sắp hết hạn. done(ok).</summary>
+    public static IEnumerator EnsureFreshToken(Action<bool> done)
     {
-        return (username ?? "").Trim().ToLowerInvariant();
+        if (!IsOnline) { done(false); yield break; }
+        if (DateTime.UtcNow < tokenExpiresUtc.AddMinutes(-5)) { done(true); yield break; }
+
+        FirebaseAuthClient.Session session = null; bool temporary = false;
+        yield return FirebaseAuthClient.Refresh(refreshToken, (s, e, t) => { session = s; temporary = t; });
+        if (session == null)
+        {
+            if (!temporary)
+            {
+                // Phiên hỏng giữa chừng: ngừng đồng bộ (save vẫn ghi trên máy, cờ pendingUpload giữ lại)
+                Debug.LogWarning("[Auth] Phiên Firebase không còn hợp lệ, tạm ngừng đồng bộ cloud.");
+                IdToken = null;
+                refreshToken = null;
+                ForgetRememberedSession();
+            }
+            done(false);
+            yield break;
+        }
+
+        StartSession(CurrentUser, session);
+        done(true);
     }
 
-    static string GenerateSalt()
+    static void StartSession(string username, FirebaseAuthClient.Session s)
     {
-        byte[] bytes = new byte[16];
-        using (var rng = RandomNumberGenerator.Create())
-            rng.GetBytes(bytes);
-        return Convert.ToBase64String(bytes);
+        CurrentUser = username;
+        Uid = s.localId;
+        IdToken = s.idToken;
+        refreshToken = s.refreshToken;
+        int seconds = int.TryParse(s.expiresIn, out var v) ? v : 3600;
+        tokenExpiresUtc = DateTime.UtcNow.AddSeconds(seconds);
     }
 
-    static string Hash(string password, string salt)
+    // ---------- Tên đăng nhập ----------
+
+    static string Normalize(string username) => (username ?? "").Trim().ToLowerInvariant();
+
+    /// <summary>"rin" → "rin@players.watergunfight.app"; email gõ thẳng thì giữ nguyên.</summary>
+    static string ToEmail(string username) =>
+        username.Contains("@") ? username : username + "@" + FirebaseConfig.Get().usernameDomain;
+
+    static string ValidateUsername(string username)
     {
-        byte[] saltBytes = Convert.FromBase64String(salt);
-        using (var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, HashIterations))
-            return Convert.ToBase64String(pbkdf2.GetBytes(32));
+        if (username.Contains("@")) return null;   // email: để Firebase tự kiểm tra
+        if (username.Length < 3) return "Username must be at least 3 characters.";
+        if (username.Length > 20) return "Username can be at most 20 characters.";
+        foreach (char c in username)
+            if (!(c >= 'a' && c <= 'z') && !(c >= '0' && c <= '9') && c != '.' && c != '_' && c != '-')
+                return "Username can only use letters, numbers, dot, dash and underscore.";
+        return null;
     }
 }

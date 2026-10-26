@@ -52,11 +52,17 @@ public class PlayerSave
     public List<RunRecord> recentRuns = new List<RunRecord>();   // mới nhất ở đầu
     public bool hasSavedRun;
     public SavedRun savedRun = new SavedRun();
+    // đồng bộ cloud (CloudSaveSync)
+    public string uid;              // tài khoản Firebase sở hữu file này; rỗng = save cũ từ trước khi dùng Firebase
+    public string savedAtUtc;       // lần ghi gần nhất, ISO 8601 UTC, so sánh được dạng chuỗi
+    public bool pendingUpload;      // còn thay đổi chưa đẩy lên Firestore
 }
 
 /// <summary>
 /// Lưu kết quả mỗi ván vào file JSON riêng cho từng tài khoản:
 /// Application.persistentDataPath/saves/&lt;user&gt;.json
+/// File này là bộ nhớ đệm: khi đã đăng nhập Firebase, mỗi lần ghi sẽ được
+/// CloudSaveSync đẩy lên Firestore, và khi đăng nhập thì tải bản trên cloud về.
 /// </summary>
 public static class SaveSystem
 {
@@ -70,6 +76,11 @@ public static class SaveSystem
     static string Folder => Path.Combine(Application.persistentDataPath, "saves");
 
     public static string PathFor(string user) => Path.Combine(Folder, SafeName(user) + ".json");
+
+    public static bool HasLocal(string user) => File.Exists(PathFor(string.IsNullOrEmpty(user) ? "guest" : user));
+
+    /// <summary>Đọc file trên máy (CloudSaveSync dùng; code game cứ gọi Load).</summary>
+    public static PlayerSave LoadLocal(string user) => Load(user);
 
     public static PlayerSave Load(string user)
     {
@@ -91,10 +102,6 @@ public static class SaveSystem
         save.user = user;
         if (save.recentRuns == null) save.recentRuns = new List<RunRecord>();
         if (save.savedRun == null) save.savedRun = new SavedRun();
-
-        // Kỷ lục cũ trước đây chỉ nằm trong PlayerPrefs, gộp vào để không mất
-        int legacyBest = PlayerPrefs.GetInt("best_score_" + user, 0);
-        if (legacyBest > save.bestScore) save.bestScore = legacyBest;
 
         return save;
     }
@@ -133,7 +140,42 @@ public static class SaveSystem
         return Write(save);
     }
 
+    /// <summary>Ghi file trên máy rồi đẩy lên cloud chạy ngầm (nếu đang đăng nhập Firebase).</summary>
     static bool Write(PlayerSave save)
+    {
+        bool sync = CloudSaveSync.ShouldSync(save.user);
+        save.savedAtUtc = DateTime.UtcNow.ToString("o");
+        save.pendingUpload = sync;
+        if (sync) save.uid = AuthService.Uid;
+
+        bool ok = WriteLocal(save);
+        if (ok && sync) CloudSaveSync.Push(save.user);
+        return ok;
+    }
+
+    /// <summary>
+    /// Đổi tên file save trên máy thành &lt;user&gt;.&lt;tag&gt;.bak.json để giữ lại, không xoá.
+    /// Dùng khi file trên máy thuộc một tài khoản Firebase khác trùng tên đăng nhập.
+    /// </summary>
+    public static void BackupLocal(string user, string tag)
+    {
+        string path = PathFor(user);
+        if (!File.Exists(path)) return;
+        string backup = Path.Combine(Folder, SafeName(user) + "." + SafeName(tag) + ".bak.json");
+        try
+        {
+            if (File.Exists(backup)) File.Delete(backup);
+            File.Move(path, backup);
+            Debug.Log("[Save] File của tài khoản khác được cất sang " + backup);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("[Save] Không cất được " + path + ": " + e.Message);
+        }
+    }
+
+    /// <summary>Chỉ ghi file trên máy, không đụng tới cloud.</summary>
+    public static bool WriteLocal(PlayerSave save)
     {
         string path = PathFor(save.user);
         string temp = path + ".tmp";

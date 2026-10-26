@@ -94,13 +94,14 @@ public class MainMenuManager : MonoBehaviour
     {
         // Chuyển qua màn hình Loading, LoadingManager sẽ đọc TargetScene để load.
         PlayerPrefs.SetString("TargetScene", sceneName);
-        SceneManager.LoadScene(loadingScene);
+        SceneFader.LoadScene(loadingScene);
     }
 
     public void Logout()
     {
+        if (SceneFader.IsLoading) return;
         AuthService.Logout();
-        SceneManager.LoadScene(loginScene);
+        SceneFader.LoadScene(loginScene);
     }
 
     public void QuitGame()

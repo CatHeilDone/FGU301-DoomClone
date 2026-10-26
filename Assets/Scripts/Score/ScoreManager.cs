@@ -126,10 +126,6 @@ public class ScoreManager : MonoBehaviour
 
     static string CurrentUser => SaveSystem.CurrentUser;
 
-    string BestKey => BestKeyFor(CurrentUser);
-
-    static string BestKeyFor(string user) => "best_score_" + (string.IsNullOrEmpty(user) ? "guest" : user);
-
     /// <summary>Kỷ lục đã lưu của một tài khoản, dùng cho Main Menu.</summary>
     public static int GetBestScore(string user) => SaveSystem.Load(user).bestScore;
 
@@ -253,10 +249,6 @@ public class ScoreManager : MonoBehaviour
         LastSave = save;
         IsNewBest = run.newBest;
         BestScore = save.bestScore;
-
-        // Giữ PlayerPrefs để bản build cũ vẫn đọc được kỷ lục
-        PlayerPrefs.SetInt(BestKey, BestScore);
-        PlayerPrefs.Save();
 
         GameOver?.Invoke();
     }

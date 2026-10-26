@@ -28,15 +28,14 @@ public class LoginUI : MonoBehaviour
     [Header("Scene")]
     [SerializeField] string mainMenuScene = "MainMenu";
 
+    [Header("Màu thông báo")]
+    [SerializeField] Color infoColor = new Color32(0x9A, 0x9D, 0xA2, 0xFF);
+    [SerializeField] Color errorColor = new Color32(0xE0, 0x66, 0x66, 0xFF);
+
+    bool busy;      // đang chờ Firebase trả lời: bỏ qua các lần bấm thêm
+
     void Start()
     {
-        // Đã bật "Ghi nhớ đăng nhập" ở lần trước thì vào thẳng menu.
-        if (AuthService.TryAutoLogin())
-        {
-            SceneManager.LoadScene(mainMenuScene);
-            return;
-        }
-
         // Game FPS thường khóa chuột, ở màn hình login cần mở lại.
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -53,6 +52,17 @@ public class LoginUI : MonoBehaviour
         loginUser.text = PlayerPrefs.GetString("last_user", "");
 
         ShowLogin();
+
+        // Đã bật "Remember me" ở lần trước thì tự đăng nhập rồi vào thẳng menu.
+        busy = true;
+        Say(loginMessage, "Signing in...", false);
+        AuthService.TryAutoLogin((ok, message) =>
+        {
+            if (this == null) return;
+            if (ok) { SceneFader.LoadScene(mainMenuScene); return; }   // giữ busy để không bấm được trong lúc chuyển cảnh
+            busy = false;
+            Say(loginMessage, message ?? "", !string.IsNullOrEmpty(message));
+        });
     }
 
     void OnDestroy()
@@ -68,6 +78,7 @@ public class LoginUI : MonoBehaviour
     // ---- Chuyển panel ----
     public void ShowLogin()
     {
+        if (busy) return;
         loginPanel.SetActive(true);
         signUpPanel.SetActive(false);
         loginMessage.text = "";
@@ -75,6 +86,7 @@ public class LoginUI : MonoBehaviour
 
     public void ShowSignUp()
     {
+        if (busy) return;
         loginPanel.SetActive(false);
         signUpPanel.SetActive(true);
         signUpMessage.text = "";
@@ -83,30 +95,56 @@ public class LoginUI : MonoBehaviour
     // ---- Nút bấm ----
     public void OnLoginClicked()
     {
-        if (AuthService.Login(loginUser.text, loginPass.text, out string error))
+        if (busy) return;
+        busy = true;
+        Say(loginMessage, "Signing in...", false);
+
+        AuthService.Login(loginUser.text, loginPass.text, (ok, message) =>
         {
-            AuthService.SetRememberMe(rememberToggle != null && rememberToggle.isOn);
-            SceneManager.LoadScene(mainMenuScene);
-        }
-        else
-        {
-            loginMessage.text = error;
-        }
+            if (this == null) return;   // scene đã đổi trong lúc chờ
+            if (ok)
+            {
+                AuthService.SetRememberMe(rememberToggle != null && rememberToggle.isOn);
+                if (!string.IsNullOrEmpty(message)) Debug.LogWarning("[Login] " + message);
+                SceneFader.LoadScene(mainMenuScene);   // busy vẫn bật cho tới khi rời scene
+            }
+            else
+            {
+                busy = false;
+                Say(loginMessage, message, true);
+            }
+        });
     }
 
     public void OnSignUpClicked()
     {
-        if (AuthService.Register(signUpUser.text, signUpPass.text, signUpConfirm.text, out string error))
+        if (busy) return;
+        busy = true;
+        Say(signUpMessage, "Creating account...", false);
+
+        AuthService.Register(signUpUser.text, signUpPass.text, signUpConfirm.text, (ok, error) =>
         {
-            // Đăng ký xong thì quay về đăng nhập, điền sẵn tên tài khoản.
-            loginUser.text = signUpUser.text;
-            loginPass.text = "";
-            ShowLogin();
-            loginMessage.text = "Account created. You can log in now.";
-        }
-        else
-        {
-            signUpMessage.text = error;
-        }
+            if (this == null) return;
+            busy = false;
+            if (ok)
+            {
+                // Đăng ký xong thì quay về đăng nhập, điền sẵn tên tài khoản.
+                loginUser.text = signUpUser.text;
+                loginPass.text = "";
+                ShowLogin();
+                Say(loginMessage, "Account created. You can log in now.", false);
+            }
+            else
+            {
+                Say(signUpMessage, error, true);
+            }
+        });
+    }
+
+    void Say(TMP_Text target, string text, bool error)
+    {
+        if (!target) return;
+        target.text = text;
+        target.color = error ? errorColor : infoColor;
     }
 }
