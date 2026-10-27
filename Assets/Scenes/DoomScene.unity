@@ -1578,7 +1578,7 @@ Transform:
   m_GameObject: {fileID: 192112502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.4, y: 0.08, z: 222.8}
+  m_LocalPosition: {x: -9.4, y: 0.08, z: 148.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3881,7 +3881,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 213623576295783933, guid: 775dcdb85b9f4f043b09939ee4f2ab17, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -17.000061
+      value: -17.000153
       objectReference: {fileID: 0}
     - target: {fileID: 1724213981795103807, guid: 775dcdb85b9f4f043b09939ee4f2ab17, type: 3}
       propertyPath: m_AnchorMax.y
@@ -19942,6 +19942,15 @@ MonoBehaviour:
   hoverHeight: 5.5
   bobAmplitude: 0.3
   bobSpeed: 1.2
+  chasePlayer: 1
+  chaseSpeed: 3.5
+  chaseSpeedPhase2: 5
+  chaseAcceleration: 4
+  chaseStopDistance: 9
+  chaseMaxPlayerDistance: 60
+  leashRadius: 30
+  bodyRadius: 2.8
+  chargeMoveMultiplier: 0.5
   attackInterval: 5
   attackIntervalPhase2: 4
   eyeL: {fileID: 0}
@@ -19985,6 +19994,7 @@ MonoBehaviour:
   deathFallTime: 1.5
   victoryDelay: 1.5
   deadColor: {r: 0.25, g: 0.25, b: 0.28, a: 1}
+  bodyRenderer: {fileID: 0}
   currentAction: "Ch\u1EDD"
 --- !u!114 &1495025233
 MonoBehaviour:
