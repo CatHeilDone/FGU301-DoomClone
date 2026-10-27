@@ -53,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>Enemy.Start gọi vào đây để ghi lại vị trí spawn.</summary>
     public void Register(Enemy enemy)
     {
+        if (enemy.isBoss) return;
         if (spawned.Contains(enemy)) return;
 
         spawnPoints.Add(enemy.transform.position);

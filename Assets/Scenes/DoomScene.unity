@@ -8948,6 +8948,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1341647683772545589, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341647683772545589, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
+      propertyPath: enemyHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341647683772545589, guid: de6bcf276fbfad74590e832815b4b45d, type: 3}
       propertyPath: gunHitEffect
       value: 
       objectReference: {fileID: 1017024064}
