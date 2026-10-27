@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8690774471419428172}
   - component: {fileID: 7415279123823996585}
   - component: {fileID: 7165633989716731289}
+  - component: {fileID: -5237685720189011742}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -169,6 +170,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AngelToPlayer
   lastIndex: 0
+--- !u!114 &-5237685720189011742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2774158633928959869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee500e9d70f91f446bc35a2c3481be7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyLootDrop
+  dropChance: 40
+  spawnHeight: 0.3
+  randomOffset: 0.3
+  lootTable:
+  - prefab: {fileID: 1088176449414690396, guid: 8e18a8f9033575147aaa9cfbd8e8c0c0, type: 3}
+    weight: 10
+  - prefab: {fileID: 7495239501032938400, guid: 8916d9bf168711141b68b4e797ca8b3c, type: 3}
+    weight: 10
+  - prefab: {fileID: 3813081849523084910, guid: 433f6126c4cb4494188d1dab3c7bae5f, type: 3}
+    weight: 40
+  - prefab: {fileID: 5799202778431178353, guid: 0c820894c59887142834ea9b92e655e7, type: 3}
+    weight: 40
 --- !u!1001 &214838460982651850
 PrefabInstance:
   m_ObjectHideFlags: 0

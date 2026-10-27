@@ -288,4 +288,14 @@ public class ScoreManager : MonoBehaviour
         if (rank > HighestRank) HighestRank = rank;
         RankChanged?.Invoke(old, rank);
     }
+
+    public bool IsVictory { get; private set; }
+
+    /// <summary>Hạ boss cuối: kết thúc ván với màn hình YOU WIN.</summary>
+    public void TriggerVictory()
+    {
+        if (IsGameOver) return;
+        IsVictory = true;
+        TriggerGameOver();
+    }
 }
