@@ -1,0 +1,52 @@
+{
+  "schema": "browser-fbx-material-package/1",
+  "profile": "portable",
+  "units": "meter",
+  "upAxis": "Y",
+  "handedness": "right",
+  "imageRows": "file-image upright",
+  "uvConvention": "FBX bottom-left; glTF V converted once",
+  "triangles": 849792,
+  "degenerateTriangles": 0,
+  "arraysCompressed": 2,
+  "attributeTablesCompacted": 1,
+  "geometryDecimated": false,
+  "geometryVerification": "All emitted positions, triangle indices/winding, available UV0 corners and available normal corners checked against the prepared source scene",
+  "materials": [
+    {
+      "id": "conversion_material_0",
+      "name": "Material_0",
+      "baseColorFactorLinear": [
+        1,
+        1,
+        1
+      ],
+      "emissiveFactorLinear": [
+        0,
+        0,
+        0
+      ],
+      "emissiveIntensity": 1,
+      "opacity": 1,
+      "alphaTest": 0,
+      "doubleSided": false,
+      "transparent": false,
+      "normalMapType": 0,
+      "unlit": false,
+      "aoMapIntensity": 1,
+      "bumpScale": 1,
+      "normalScaleTargetFBX": [
+        1,
+        -1
+      ],
+      "roughnessFactor": 1,
+      "metalnessFactor": 0,
+      "maps": {},
+      "legacyPhongApproximation": {
+        "roughnessAverage": 1,
+        "shininess": 0,
+        "metalnessAverage": 0
+      }
+    }
+  ]
+}

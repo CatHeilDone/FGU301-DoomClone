@@ -3,97 +3,118 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    [Header("Kích hoạt")]
+    [Header("Activation")]
     public Transform player;
-    [Tooltip("Người chơi vào trong khoảng này (mét) thì boss bắt đầu trận đấu")]
+    [Tooltip("When the player gets this close (meters) the fight starts")]
     public float activationRange = 25f;
     public float startDelay = 2f;
 
-    [Header("Xoay mặt")]
-    [Tooltip("Độ/giây. Càng thấp thì càng dễ chạy vòng ra lưng boss")]
+    [Header("Turning")]
+    [Tooltip("Degrees per second. Lower = easier to run around to the boss's back")]
     public float turnSpeed = 30f;
     public bool canTurn = true;
 
-    [Header("Bay lơ lửng")]
-    [Tooltip("Độ cao tâm quả cầu so với chân boss (mét). Trần phòng thấp thì giảm xuống")]
+    [Header("Hovering")]
+    [Tooltip("Height of the sphere's center above the boss's feet (meters). Lower it if the room's ceiling is low")]
     public float hoverHeight = 5.5f;
     public float bobAmplitude = 0.3f;
     public float bobSpeed = 1.2f;
 
-    [Header("Nhịp đánh")]
-    [Tooltip("Khoảng thời gian giữa hai đòn (tính từ lúc bắt đầu đòn trước)")]
+    [Header("Chase")]
+    public bool chasePlayer = true;
+    public float chaseSpeed = 3.5f;
+    public float chaseSpeedPhase2 = 5f;
+    [Tooltip("How quickly the boss speeds up / slows down (m/s per second)")]
+    public float chaseAcceleration = 4f;
+    [Tooltip("The boss stops this close to the player (meters)")]
+    public float chaseStopDistance = 9f;
+    [Tooltip("If the player is farther than this, the boss stays put")]
+    public float chaseMaxPlayerDistance = 60f;
+    [Tooltip("The boss never goes farther than this from where it started")]
+    public float leashRadius = 30f;
+    [Tooltip("Size used to check for walls while flying (the body is about 3)")]
+    public float bodyRadius = 2.8f;
+    [Tooltip("Speed multiplier while charging a laser, before the aim locks")]
+    public float chargeMoveMultiplier = 0.5f;
+
+    [Header("Attack rhythm")]
+    [Tooltip("Time between the starts of two attacks")]
     public float attackInterval = 5f;
     public float attackIntervalPhase2 = 4f;
 
-    [Header("Laze (dùng chung cho laze ngang và laze dọc)")]
+    [Header("Lasers (shared by horizontal and vertical laser)")]
     public Transform eyeL;
     public Transform eyeR;
     public Material warningMaterial;
     public Material beamMaterial;
     public Color eyeGlowColor = new Color(1f, 0.2f, 0.2f);
-    [Tooltip("Tổng thời gian gồng trước khi bắn (giây)")]
+    [Tooltip("Total charge time before firing (seconds)")]
     public float laserChargeTime = 1.5f;
-    [Tooltip("Đến giây này thì khóa hướng. Phần còn lại là thời gian để người chơi né")]
+    [Tooltip("The aim locks at this time. The rest is the player's time to dodge")]
     public float laserLockTime = 0.8f;
-    [Tooltip("Những layer chặn tia và nhận sát thương: tường, cột băng, người chơi")]
+    [Tooltip("Layers that block the beams and can be hit: walls, pillars, the player")]
     public LayerMask laserMask = 1;
     public float laserMaxLength = 60f;
-    [Tooltip("Bắn trúng mắt bấy nhiêu lần lúc đang gồng thì đòn bị ngắt")]
+    [Tooltip("Hits on an eye while charging that interrupt the attack")]
     public int eyeHitsToInterrupt = 1;
     public float interruptStunTime = 1.5f;
 
-    [Header("Laze ngang")]
+    [Header("Horizontal laser")]
     public float laserFireTime = 0.7f;
     public int laserDamage = 20;
-    [Tooltip("Độ dày của tia khi tính trúng (mét)")]
+    [Tooltip("Beam thickness used for hit detection (meters)")]
     public float laserRadius = 0.4f;
 
-    [Header("Laze dọc")]
-    [Tooltip("Tự tìm object con tên Model")]
+    [Header("Vertical laser")]
+    [Tooltip("Found automatically (the child named Model)")]
     public Transform model;
-    [Tooltip("Góc ngửa mặt lên khi gồng (độ)")]
+    [Tooltip("How far the head tilts back while charging (degrees)")]
     public float verticalTiltAngle = 25f;
     public float verticalSweepTime = 0.6f;
-    [Tooltip("Góc bắt đầu của tia (âm = hướng lên trời)")]
+    [Tooltip("Start angle of the beam (negative = pointing up)")]
     public float verticalSweepFrom = -20f;
-    [Tooltip("Góc kết thúc của tia (dương = chúc xuống sàn)")]
+    [Tooltip("End angle of the beam (positive = pointing down at the floor)")]
     public float verticalSweepTo = 70f;
-    [Tooltip("Một nửa độ rộng của dải nguy hiểm (mét)")]
+    [Tooltip("Half the width of the danger strip (meters)")]
     public float verticalBeamRadius = 0.6f;
     public int verticalDamage = 25;
     public float verticalWarnLength = 40f;
 
-    [Header("Dậm đất")]
-    [Tooltip("Bán kính vùng nguy hiểm quanh boss (mét)")]
+    [Header("Stomp")]
+    [Tooltip("Radius of the danger zone around the boss (meters)")]
     public float stompRadius = 12f;
-    [Tooltip("Boss bay vọt lên cao thêm bao nhiêu mét trước khi rơi")]
+    [Tooltip("How much higher the boss rises before slamming down (meters)")]
     public float stompRiseHeight = 3f;
     public float stompRiseTime = 1.2f;
     public float stompFallTime = 0.3f;
-    [Tooltip("Độ cao tâm quả cầu khi chạm sàn (bán kính 3 + 0,1)")]
+    [Tooltip("Height of the sphere's center when it lands (radius 3 + 0.1)")]
     public float landedHeight = 3.1f;
     public float shockwaveTime = 0.5f;
     public int stompDamage = 10;
     public float playerStunTime = 1.5f;
-    [Tooltip("Boss nằm choáng trên sàn bao lâu (giây)")]
+    [Tooltip("How long the boss lies stunned on the floor (seconds)")]
     public float stompRecoverTime = 2.5f;
     public float stompReturnTime = 1f;
 
-    [Header("Pha 2 (dưới 50% máu)")]
+    [Header("Phase 2 (below 50% health)")]
     public Color phase2BodyColor = new Color(1f, 0.55f, 0.5f);
-    [Tooltip("Phát laze ngang thứ hai: thời gian gồng ngắn hơn")]
+    [Tooltip("Second horizontal laser shot: shorter charge time")]
     public float phase2SecondCharge = 1.1f;
     public float phase2SecondLock = 0.45f;
     public float phase2ShotGap = 0.3f;
 
-    [Header("Khi bị hạ")]
+    [Header("When defeated")]
     public float deathFallTime = 1.5f;
-    [Tooltip("Chờ bao lâu sau khi boss nằm xuống thì hiện màn hình YOU WIN")]
+    [Tooltip("How long to wait after the boss lies down before showing YOU WIN")]
     public float victoryDelay = 1.5f;
     public Color deadColor = new Color(0.25f, 0.25f, 0.28f);
 
-    [Header("Trạng thái (chỉ để xem)")]
-    public string currentAction = "Chờ";
+    [Header("Body renderer (optional)")]
+    [Tooltip("Renderer tinted in phase 2 and when dying. Leave empty to find it automatically")]
+    public Renderer bodyRenderer;
+
+    [Header("State (read-only, for debugging)")]
+    public string currentAction = "Idle";
 
     public bool IsActivated => activated;
 
@@ -106,7 +127,6 @@ public class BossController : MonoBehaviour
     Renderer[] eyeRenderers;
     WeakPoint[] eyeWeakPoints;
     Color[] eyeBaseColors;
-    Renderer bodyRenderer;
     LineRenderer[] warningLines;
     LineRenderer[] beamLines;
     LineRenderer floorWarningLine;
@@ -118,11 +138,20 @@ public class BossController : MonoBehaviour
     int chargeHits;
     bool laserInterrupted;
 
-    // Bay lơ lửng
-    float heightOffset;          // độ lệch thêm do đòn dậm đất / lúc chết
+    // Chase
+    bool attacking;
+    float chaseVelocity;
+    Vector3 homePosition;
+    static readonly RaycastHit[] castBuffer = new RaycastHit[8];
+
+    // Hovering
+    float heightOffset;          // extra offset from the stomp / death
     bool bobbing = true;
     float bobScale = 1f;
     float modelBaseX, modelBaseZ;
+
+    static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
+    static readonly int ColorId = Shader.PropertyToID("_Color");
 
     void Awake()
     {
@@ -135,6 +164,7 @@ public class BossController : MonoBehaviour
             modelBaseX = model.localPosition.x;
             modelBaseZ = model.localPosition.z;
         }
+        homePosition = transform.position;
     }
 
     void Start()
@@ -161,7 +191,7 @@ public class BossController : MonoBehaviour
 
     void OnDisable()
     {
-        if (playerMove) playerMove.enabled = true;   // phòng khi người chơi đang bị choáng
+        if (playerMove) playerMove.enabled = true;   // in case the player is stunned
     }
 
     void OnDestroy()
@@ -182,14 +212,13 @@ public class BossController : MonoBehaviour
         beamLines = new LineRenderer[2];
 
         if (!warningMaterial || !beamMaterial)
-            Debug.LogWarning("[Boss] Chưa gán Warning Material / Beam Material cho BossController");
+            Debug.LogWarning("[Boss] Warning Material / Beam Material are not assigned on BossController");
 
-        var body = transform.Find("Model/Body");
-        if (body) bodyRenderer = body.GetComponent<Renderer>();
+        if (!bodyRenderer) bodyRenderer = FindBodyRenderer();
 
         for (int i = 0; i < 2; i++)
         {
-            if (!eyes[i]) { Debug.LogError("[Boss] Không tìm thấy mắt " + i); continue; }
+            if (!eyes[i]) { Debug.LogError("[Boss] Could not find eye " + i); continue; }
 
             eyeRenderers[i] = eyes[i].GetComponent<Renderer>();
             eyeWeakPoints[i] = eyes[i].GetComponent<WeakPoint>();
@@ -199,14 +228,53 @@ public class BossController : MonoBehaviour
             beamLines[i] = MakeLine("LaserBeam", eyes[i], beamMaterial, laserRadius * 2f);
         }
 
-        // Laze dọc: dải đỏ trên sàn và tia chém
+        // Vertical laser: floor strip and the slashing beam
         floorWarningLine = MakeLine("FloorWarning", transform, warningMaterial, verticalBeamRadius * 2f);
         floorWarningLine.alignment = LineAlignment.TransformZ;
         verticalBeamLine = MakeLine("VerticalBeam", transform, beamMaterial, verticalBeamRadius * 2f);
 
-        // Dậm đất: vòng báo hiệu và vòng sóng xung kích
+        // Stomp: warning circle and shockwave ring
         stompWarnLine = MakeCircle("StompWarning", warningMaterial, 0.2f);
         shockwaveLine = MakeCircle("Shockwave", beamMaterial, 0.6f);
+    }
+
+    // The body is the first active renderer under Model that is not an eye / weak point
+    Renderer FindBodyRenderer()
+    {
+        var body = transform.Find("Model/Body");
+        if (body && body.gameObject.activeInHierarchy)
+        {
+            var r = body.GetComponent<Renderer>();
+            if (r) return r;
+        }
+        if (!model) return null;
+
+        foreach (var r in model.GetComponentsInChildren<Renderer>())   // active objects only
+        {
+            if (r is LineRenderer) continue;
+            if (r.GetComponent<WeakPoint>()) continue;
+            return r;
+        }
+        return null;
+    }
+
+    // Color helpers that don't spam errors when a shader has no color property
+    static bool TryGetColor(Renderer r, out Color c)
+    {
+        c = Color.white;
+        if (!r) return false;
+        var m = r.material;
+        if (m.HasProperty(BaseColorId)) { c = m.GetColor(BaseColorId); return true; }
+        if (m.HasProperty(ColorId)) { c = m.GetColor(ColorId); return true; }
+        return false;
+    }
+
+    static void SetColor(Renderer r, Color c)
+    {
+        if (!r) return;
+        var m = r.material;
+        if (m.HasProperty(BaseColorId)) m.SetColor(BaseColorId, c);
+        if (m.HasProperty(ColorId)) m.SetColor(ColorId, c);
     }
 
     LineRenderer MakeLine(string objName, Transform parent, Material mat, float width)
@@ -241,7 +309,7 @@ public class BossController : MonoBehaviour
         if (health.IsDead || !player) return;
 
         Vector3 toPlayer = player.position - transform.position;
-        toPlayer.y = 0f;   // chỉ xoay quanh trục dọc
+        toPlayer.y = 0f;   // only rotate around the vertical axis
 
         if (!activated)
         {
@@ -259,9 +327,11 @@ public class BossController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation, target, turnSpeed * Time.deltaTime);
         }
+
+        ChasePlayer(toPlayer);
     }
 
-    // Giữ cho đầu boss lơ lửng ở độ cao hoverHeight, nhấp nhô nhẹ
+    // Keeps the head floating at hoverHeight with a gentle bob
     void ApplyHover()
     {
         if (!model) return;
@@ -270,23 +340,102 @@ public class BossController : MonoBehaviour
         model.localPosition = new Vector3(modelBaseX, hoverHeight + heightOffset + bob, modelBaseZ);
     }
 
+    // ================= CHASE =================
+
+    // Fly toward the player (horizontal only; the head still hovers on its own)
+    void ChasePlayer(Vector3 toPlayerFlat)
+    {
+        float dist = toPlayerFlat.magnitude;
+        float targetSpeed = 0f;
+
+        if (chasePlayer && !health.IsBroken && dist > chaseStopDistance && dist <= chaseMaxPlayerDistance)
+        {
+            float mult;
+            if (!attacking) mult = 1f;                                   // between attacks: full speed
+            else if (charging && canTurn) mult = chargeMoveMultiplier;   // charging, aim not locked yet
+            else mult = 0f;                                              // locked / stomping / stunned: stand still
+
+            float speed = health.IsPhase2 ? chaseSpeedPhase2 : chaseSpeed;
+            targetSpeed = speed * mult;
+        }
+
+        chaseVelocity = Mathf.MoveTowards(chaseVelocity, targetSpeed, chaseAcceleration * Time.deltaTime);
+        if (chaseVelocity < 0.01f) return;
+
+        Vector3 step = toPlayerFlat.normalized * chaseVelocity * Time.deltaTime;
+        step = ClipMovement(step);
+
+        Vector3 newPos = transform.position + step;
+
+        // Stay inside the leash around the starting position
+        Vector3 fromHome = newPos - homePosition;
+        fromHome.y = 0f;
+        if (fromHome.magnitude > leashRadius)
+        {
+            fromHome = fromHome.normalized * leashRadius;
+            newPos = new Vector3(homePosition.x + fromHome.x, transform.position.y, homePosition.z + fromHome.z);
+        }
+        transform.position = newPos;
+    }
+
+    // Stops the boss at walls and slides it along them
+    Vector3 ClipMovement(Vector3 step)
+    {
+        float len = step.magnitude;
+        if (len < 1e-5f) return step;
+
+        Vector3 origin = model ? model.position : transform.position + Vector3.up * hoverHeight;
+
+        if (BlockedAlong(origin, step / len, len + 0.05f, out RaycastHit hit))
+        {
+            Vector3 slide = Vector3.ProjectOnPlane(step, hit.normal);
+            slide.y = 0f;
+            float slen = slide.magnitude;
+            if (slen > 1e-5f && !BlockedAlong(origin, slide / slen, slen + 0.05f, out _))
+                return slide;
+            return Vector3.zero;
+        }
+        return step;
+    }
+
+    // Nearest obstacle ahead, ignoring the boss's own colliders
+    bool BlockedAlong(Vector3 origin, Vector3 dir, float dist, out RaycastHit nearest)
+    {
+        nearest = default;
+        int n = Physics.SphereCastNonAlloc(origin, bodyRadius, dir, castBuffer, dist,
+            laserMask, QueryTriggerInteraction.Ignore);
+
+        float best = float.MaxValue;
+        bool found = false;
+        for (int i = 0; i < n; i++)
+        {
+            var h = castBuffer[i];
+            if (h.collider.transform.IsChildOf(transform)) continue;   // ignore ourselves
+            if (h.distance < best) { best = h.distance; nearest = h; found = true; }
+        }
+        return found;
+    }
+
+    // ================= ATTACK LOOP =================
+
     IEnumerator AttackLoop()
     {
-        currentAction = "Chuẩn bị";
+        currentAction = "Getting ready";
         yield return new WaitForSeconds(startDelay);
 
         int index = 0;
         while (!health.IsDead)
         {
-            // Đang vỡ băng thì boss đứng yên chịu đòn, không tấn công
+            // While "broken" the boss stands still and takes extra damage; no attacks
             while (health.IsBroken)
             {
-                currentAction = "Vỡ băng";
+                currentAction = "Broken";
                 yield return null;
             }
 
             float startTime = Time.time;
 
+            attacking = true;
             switch (index % 3)
             {
                 case 0: yield return StartCoroutine(LaserHorizontal()); break;
@@ -294,17 +443,18 @@ public class BossController : MonoBehaviour
                 default: yield return StartCoroutine(Stomp()); break;
             }
             index++;
+            attacking = false;
 
-            currentAction = "Nghỉ";
+            currentAction = "Resting";
             float interval = health.IsPhase2 ? attackIntervalPhase2 : attackInterval;
             float rest = interval - (Time.time - startTime);
             yield return new WaitForSeconds(Mathf.Max(0.5f, rest));
         }
     }
 
-    // ================= LAZE NGANG =================
+    // ================= HORIZONTAL LASER =================
 
-    // Pha 1: một phát. Pha 2: hai phát liên tiếp (phát thứ hai gồng ngắn hơn)
+    // Phase 1: one shot. Phase 2: two shots in a row (the second charges faster)
     IEnumerator LaserHorizontal()
     {
         int shots = health.IsPhase2 ? 2 : 1;
@@ -316,14 +466,14 @@ public class BossController : MonoBehaviour
 
             yield return StartCoroutine(LaserShot(charge, lockT));
 
-            if (laserInterrupted) yield break;   // bị ngắt thì hủy luôn phát còn lại
+            if (laserInterrupted) yield break;   // interrupted: cancel the remaining shot
             if (i < shots - 1) yield return new WaitForSeconds(phase2ShotGap);
         }
     }
 
     IEnumerator LaserShot(float chargeTime, float lockTime)
     {
-        currentAction = "Laze ngang: gồng";
+        currentAction = "Horizontal laser: charging";
         charging = true;
         chargeHits = 0;
 
@@ -331,6 +481,7 @@ public class BossController : MonoBehaviour
         bool locked = false;
         float t = 0f;
 
+        // Charge: warning lines follow the player, then lock
         while (t < chargeTime)
         {
             t += Time.deltaTime;
@@ -343,7 +494,7 @@ public class BossController : MonoBehaviour
                 {
                     locked = true;
                     canTurn = false;
-                    currentAction = "Laze ngang: đã khóa hướng";
+                    currentAction = "Horizontal laser: aim locked";
                 }
             }
             DrawLines(warningLines, aimPoint);
@@ -359,8 +510,9 @@ public class BossController : MonoBehaviour
 
         charging = false;
         HideLines(warningLines);
-        currentAction = "Laze ngang: bắn";
+        currentAction = "Horizontal laser: firing";
 
+        // Fire
         bool alreadyHit = false;
         float fireT = 0f;
         while (fireT < laserFireTime)
@@ -369,7 +521,7 @@ public class BossController : MonoBehaviour
             bool touchedPlayer = DrawLines(beamLines, aimPoint);
             if (touchedPlayer && !alreadyHit)
             {
-                alreadyHit = true;   // mỗi phát chỉ gây sát thương một lần
+                alreadyHit = true;   // damage only once per shot
                 if (playerHealth) playerHealth.DamagePlayer(laserDamage);
             }
             yield return null;
@@ -380,11 +532,11 @@ public class BossController : MonoBehaviour
         canTurn = true;
     }
 
-    // ================= LAZE DỌC =================
+    // ================= VERTICAL LASER =================
 
     IEnumerator LaserVertical()
     {
-        currentAction = "Laze dọc: gồng";
+        currentAction = "Vertical laser: charging";
         charging = true;
         chargeHits = 0;
 
@@ -393,7 +545,7 @@ public class BossController : MonoBehaviour
         bool locked = false;
         float t = 0f;
 
-        // Gồng: ngửa mặt lên, dải đỏ trên sàn bám theo người chơi rồi khóa
+        // Charge: head tilts back, the red strip on the floor follows the player, then locks
         while (t < laserChargeTime)
         {
             t += Time.deltaTime;
@@ -408,7 +560,7 @@ public class BossController : MonoBehaviour
                 {
                     locked = true;
                     canTurn = false;
-                    currentAction = "Laze dọc: đã khóa hướng";
+                    currentAction = "Vertical laser: aim locked";
                 }
             }
             DrawFloorLine(lockedDir, floorY);
@@ -422,9 +574,9 @@ public class BossController : MonoBehaviour
         }
 
         charging = false;
-        currentAction = "Laze dọc: chém";
+        currentAction = "Vertical laser: slash";
 
-        // Điểm xuất phát của tia: ngay trước mặt boss, cao bằng hai mắt
+        // Beam origin: right in front of the boss, at eye height
         Vector3 eyeMid = FaceOrigin();
         Vector3 horiz = eyeMid - transform.position;
         horiz.y = 0f;
@@ -432,7 +584,7 @@ public class BossController : MonoBehaviour
                          + lockedDir * horiz.magnitude;
         Vector3 right = Vector3.Cross(Vector3.up, lockedDir);
 
-        // Chém: tia quét từ trên trời xuống sàn trong mặt phẳng dải đỏ
+        // Slash: the beam sweeps from the sky down to the floor inside the strip's plane
         bool alreadyHit = false;
         float s = 0f;
         while (s < 1f)
@@ -495,7 +647,7 @@ public class BossController : MonoBehaviour
         if (!floorWarningLine) return;
         Vector3 start = new Vector3(transform.position.x, floorY + 0.05f, transform.position.z);
         floorWarningLine.enabled = true;
-        floorWarningLine.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);   // nằm phẳng trên sàn
+        floorWarningLine.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);   // lies flat on the floor
         floorWarningLine.SetPosition(0, start);
         floorWarningLine.SetPosition(1, start + dir * verticalWarnLength);
     }
@@ -523,20 +675,20 @@ public class BossController : MonoBehaviour
         SetHeadTilt(0f);
     }
 
-    // ================= DẬM ĐẤT =================
+    // ================= STOMP =================
 
     IEnumerator Stomp()
     {
-        currentAction = "Dậm đất: bay lên";
+        currentAction = "Stomp: rising";
         canTurn = false;
         bobbing = false;
 
         float floorY = FloorY();
         Vector3 center = new Vector3(transform.position.x, floorY + 0.05f, transform.position.z);
-        // độ lệch cần có để tâm quả cầu hạ xuống đúng độ cao landedHeight so với sàn
+        // offset needed so the sphere's center ends up landedHeight above the floor
         float landOffset = landedHeight + (floorY - transform.position.y) - hoverHeight;
 
-        // 1) Bay vọt lên cao, vòng đỏ báo vùng nguy hiểm
+        // 1) Rise high, red circle shows the danger zone
         float t = 0f;
         while (t < stompRiseTime)
         {
@@ -546,8 +698,8 @@ public class BossController : MonoBehaviour
             yield return null;
         }
 
-        // 2) Lao xuống sàn
-        currentAction = "Dậm đất: lao xuống";
+        // 2) Slam down
+        currentAction = "Stomp: slamming";
         t = 0f;
         while (t < stompFallTime)
         {
@@ -559,8 +711,8 @@ public class BossController : MonoBehaviour
         heightOffset = landOffset;
         HideLine(stompWarnLine);
 
-        // 3) Sóng xung kích lan ra
-        currentAction = "Dậm đất: sóng xung kích";
+        // 3) Shockwave spreads out
+        currentAction = "Stomp: shockwave";
         bool alreadyHit = false;
         t = 0f;
         while (t < shockwaveTime)
@@ -584,12 +736,12 @@ public class BossController : MonoBehaviour
         }
         HideLine(shockwaveLine);
 
-        // 4) Boss nằm choáng trên sàn, lộ lưng cho người chơi bắn
-        currentAction = "Choáng (lộ lưng)";
+        // 4) Stunned on the floor: its back is exposed
+        currentAction = "Stunned (back exposed)";
         yield return new WaitForSeconds(stompRecoverTime);
 
-        // 5) Bay trở lại vị trí lơ lửng
-        currentAction = "Bay lên lại";
+        // 5) Float back up
+        currentAction = "Rising again";
         t = 0f;
         while (t < stompReturnTime)
         {
@@ -606,7 +758,7 @@ public class BossController : MonoBehaviour
     {
         if (!lr) return;
         lr.enabled = true;
-        lr.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);   // nằm phẳng trên sàn
+        lr.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);   // lies flat on the floor
         int n = lr.positionCount;
         for (int i = 0; i < n; i++)
         {
@@ -620,7 +772,7 @@ public class BossController : MonoBehaviour
         if (lr) lr.enabled = false;
     }
 
-    // Làm người chơi không đi được trong một lúc (vẫn xoay được tầm nhìn)
+    // Freezes the player's movement for a while (they can still look around)
     void StunPlayer(float duration)
     {
         if (playerMove) StartCoroutine(StunPlayerRoutine(duration));
@@ -634,12 +786,12 @@ public class BossController : MonoBehaviour
         playerMove.enabled = true;
     }
 
-    // ================= DÙNG CHUNG =================
+    // ================= SHARED =================
 
     IEnumerator InterruptLaser()
     {
         charging = false;
-        currentAction = "Bị ngắt (choáng)";
+        currentAction = "Interrupted (stunned)";
         HideLines(warningLines);
         HideVerticalVisuals();
         SetHeadTilt(0f);
@@ -648,7 +800,7 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(interruptStunTime);
     }
 
-    // Vẽ tia từ mỗi mắt tới điểm ngắm. Trả về true nếu tia chạm người chơi
+    // Draws a beam from each eye toward the aim point. Returns true if a beam touches the player
     bool DrawLines(LineRenderer[] lines, Vector3 aimPoint)
     {
         bool hitPlayer = false;
@@ -688,7 +840,7 @@ public class BossController : MonoBehaviour
         for (int i = 0; i < eyeRenderers.Length; i++)
         {
             if (!eyeRenderers[i]) continue;
-            if (eyeWeakPoints[i] && eyeWeakPoints[i].IsBroken) continue;   // mắt đã vỡ thì giữ màu xám
+            if (eyeWeakPoints[i] && eyeWeakPoints[i].IsBroken) continue;   // a broken eye keeps its gray color
             eyeRenderers[i].material.color = Color.Lerp(eyeBaseColors[i], eyeGlowColor, k);
         }
     }
@@ -698,33 +850,33 @@ public class BossController : MonoBehaviour
         SetEyeGlow(0f);
     }
 
-    // ================= SỰ KIỆN TỪ BossHealth =================
+    // ================= EVENTS FROM BossHealth =================
 
     void HandleWeakPointHit(WeakPoint wp)
     {
-        // Bắn trúng mắt lúc đang gồng laze thì tích lũy để ngắt đòn
+        // Hitting an eye while a laser is charging builds up toward interrupting it
         if (charging && wp.kind == WeakPoint.Kind.Eye)
             chargeHits++;
     }
 
     void HandlePhase2()
     {
-        Debug.Log("[Boss] Vào pha 2");
+        Debug.Log("[Boss] Phase 2");
         StartCoroutine(TintBody(phase2BodyColor, 1f));
     }
 
     IEnumerator TintBody(Color target, float duration)
     {
-        if (!bodyRenderer) yield break;
-        Color from = bodyRenderer.material.color;
+        if (!bodyRenderer || !TryGetColor(bodyRenderer, out Color from)) yield break;
+
         float t = 0f;
         while (t < duration)
         {
             t += Time.deltaTime;
-            bodyRenderer.material.color = Color.Lerp(from, target, t / duration);
+            SetColor(bodyRenderer, Color.Lerp(from, target, t / duration));
             yield return null;
         }
-        bodyRenderer.material.color = target;
+        SetColor(bodyRenderer, target);
     }
 
     void HandleDied()
@@ -736,22 +888,24 @@ public class BossController : MonoBehaviour
         HideLine(stompWarnLine);
         HideLine(shockwaveLine);
         SetHeadTilt(0f);
-        if (playerMove) playerMove.enabled = true;   // dừng choáng nếu boss chết giữa chừng
+        if (playerMove) playerMove.enabled = true;   // release the player if the boss dies mid-stun
+        attacking = false;
+        chaseVelocity = 0f;
         canTurn = false;
-        currentAction = "Đã bị hạ";
+        currentAction = "Defeated";
         StartCoroutine(DeathSequence());
     }
 
-    // Boss rơi xuống sàn, tối màu, rồi hiện màn hình chiến thắng
+    // The boss drops to the floor, darkens, then the victory screen is shown
     IEnumerator DeathSequence()
     {
         bobbing = false;
 
-        // tắt mắt và tối màu thân
+        // eyes go dark, body darkens
         if (eyeRenderers != null)
             foreach (var r in eyeRenderers)
                 if (r) r.material.color = deadColor;
-        if (bodyRenderer) bodyRenderer.material.color = deadColor;
+        SetColor(bodyRenderer, deadColor);
 
         float floorY = FloorY();
         float landOffset = landedHeight + (floorY - transform.position.y) - hoverHeight;
@@ -777,5 +931,9 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, activationRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, stompRadius);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, chaseStopDistance);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(Application.isPlaying ? homePosition : transform.position, leashRadius);
     }
 }
