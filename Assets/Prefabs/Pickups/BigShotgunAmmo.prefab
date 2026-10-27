@@ -71,6 +71,9 @@ MonoBehaviour:
   isHealth: 0
   isAmmo: 1
   amount: 10
+  pickupSound: {fileID: 8300000, guid: 50a405f5892c2b54f806b0eae5572434, type: 3}
+  pickupVolume: 1
+  noiseRadius: 12
 --- !u!1 &4940544870309636814
 GameObject:
   m_ObjectHideFlags: 0

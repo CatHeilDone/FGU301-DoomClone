@@ -174,3 +174,6 @@ MonoBehaviour:
   isHealth: 1
   isAmmo: 0
   amount: 30
+  pickupSound: {fileID: 8300000, guid: 50a405f5892c2b54f806b0eae5572434, type: 3}
+  pickupVolume: 1
+  noiseRadius: 12

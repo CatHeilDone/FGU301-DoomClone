@@ -29,7 +29,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenu.IsPaused || WakeUpIntro.IsPlaying) return;
         GetInput();
         ModifyInput();
         MovePlayer();

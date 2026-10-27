@@ -27,6 +27,13 @@ public class PlayerMove : MonoBehaviour
     public float walkNoise = 8f;
     public float sprintNoise = 16f;
 
+    // ===== MỚI: âm thanh bước chân (lặp liên tục khi đang đi) =====
+    public AudioSource footAudio;      // để trống thì tự lấy AudioSource trên Player
+    public AudioClip walkStep;         // âm thanh đi bộ (lặp lại khi đang đi)
+    public AudioClip sprintStep;       // âm thanh chạy (lặp lại khi đang chạy)
+    public float crouchVolume = 0.4f;  // cúi thì nhỏ tiếng
+    public float crouchPitch = 0.6f;   // cúi thì nhịp bước chậm lại và trầm hơn
+
     private bool isSprinting;
     private bool isCrouching;
     private float standHeight;                 // chiều cao lúc đứng (lấy từ CharacterController)
@@ -45,19 +52,22 @@ public class PlayerMove : MonoBehaviour
         feetY = myCC.center.y - myCC.height / 2f;
         if (cameraRoot) cameraRootStartY = cameraRoot.localPosition.y;
         NoiseRadius = idleNoise;
+        if (!footAudio) footAudio = GetComponent<AudioSource>();   // MỚI
     }
 
     void Update()
     {
-        if (PauseMenu.IsPaused)
+        if (PauseMenu.IsPaused || WakeUpIntro.IsPlaying)
         {
-            NoiseRadius = idleNoise;   // MỚI: enemy vẫn chạy Update khi pause nên phải hạ tiếng động xuống
+            NoiseRadius = idleNoise; // MỚI: enemy vẫn chạy Update khi pause nên phải hạ tiếng động xuống
+            if (footAudio) footAudio.Stop();   // MỚI: pause hoặc intro thì tắt tiếng bước chân
             return;
         }
         GetInput();
         HandleCrouch();   // MỚI
         MovePlayer();
         UpdateNoise();    // MỚI
+        HandleFootsteps();   // MỚI
 
         camAnim.SetBool("isWalking", isWalking);
     }
@@ -136,6 +146,41 @@ public class PlayerMove : MonoBehaviour
         else if (isSprinting) NoiseRadius = sprintNoise;
         else if (isCrouching) NoiseRadius = crouchNoise;
         else NoiseRadius = walkNoise;
+    }
+
+    // ===== MỚI: tiếng bước chân lặp liên tục khi đang đi =====
+    void HandleFootsteps()
+    {
+        if (!footAudio) return;
+
+        // Chạy dùng clip chạy, còn đi bộ và cúi dùng chung clip đi bộ
+        AudioClip clip = isSprinting ? sprintStep : walkStep;
+
+        if (!isWalking || !clip)
+        {
+            if (footAudio.isPlaying) footAudio.Stop();   // đứng yên thì im
+            return;
+        }
+
+        footAudio.loop = true;                                // hết clip thì phát lại từ đầu
+        footAudio.volume = isCrouching ? crouchVolume : 1f;   // cúi thì nhỏ tiếng
+        footAudio.pitch = isCrouching ? crouchPitch : 1f;     // pitch thấp thì nhịp bước chậm lại và trầm hơn
+
+        if (footAudio.clip != clip)
+        {
+            footAudio.clip = clip;   // đổi trạng thái (đi <-> chạy) thì đổi clip
+            footAudio.Play();
+        }
+        else if (!footAudio.isPlaying)
+        {
+            footAudio.Play();        // vừa bắt đầu đi lại sau khi đứng yên
+        }
+    }
+
+    // MỚI: PlayerMove bị tắt (ví dụ khi Game Over) thì tắt luôn tiếng bước chân đang lặp
+    void OnDisable()
+    {
+        if (footAudio) footAudio.Stop();
     }
 
     // (Tùy chọn) vẽ vòng tiếng động trong Scene view để dễ debug ======= Mới
