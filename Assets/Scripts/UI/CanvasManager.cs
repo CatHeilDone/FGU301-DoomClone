@@ -8,6 +8,10 @@ public class CanvasManager : MonoBehaviour
     public TextMeshProUGUI ammo;
     public TextMeshProUGUI armor;
 
+    public TMP_Text healthBarText;
+    public TMP_Text armorBarText;
+    public TMP_Text waterBarText;
+
     public Image healthIndicator;
 
     public Sprite health1; //healthy
@@ -37,6 +41,9 @@ public class CanvasManager : MonoBehaviour
     private float healthTarget = 1f, armorTarget = 1f, waterTarget = 1f;
     private PlayerHealth playerHealth;
     private Gun gun;
+
+    private int maxHealthValue = 100;
+    private int maxArmorValue = 100;
 
     private static CanvasManager _instance;
     public static CanvasManager Instance
@@ -96,6 +103,7 @@ public class CanvasManager : MonoBehaviour
         if (playerHealth && playerHealth.maxHealth > 0)
             healthTarget = Mathf.Clamp01((float)healthValue / playerHealth.maxHealth);
         UpdateHealthIndicator(healthValue);
+        if (healthBarText != null) healthBarText.text = healthValue + " / " + maxHealthValue;
     }
 
     public void UpdateArmor(int armorValue)
@@ -104,6 +112,7 @@ public class CanvasManager : MonoBehaviour
         if (!playerHealth) playerHealth = FindObjectOfType<PlayerHealth>();
         if (playerHealth && playerHealth.maxArmor > 0)
             armorTarget = Mathf.Clamp01((float)armorValue / playerHealth.maxArmor);
+        if (armorBarText != null) armorBarText.text = armorValue + " / " + maxArmorValue;
     }
 
     public void UpdateAmmo(int ammoValue)
@@ -112,6 +121,7 @@ public class CanvasManager : MonoBehaviour
         if (!gun) gun = FindObjectOfType<Gun>();
         if (gun && gun.maxAmmo > 0)
             waterTarget = Mathf.Clamp01((float)ammoValue / gun.maxAmmo);
+        if (waterBarText != null) waterBarText.text = ammoValue.ToString();
     }
 
     public void UpdateHealthIndicator(int healthValue)
@@ -155,5 +165,11 @@ public class CanvasManager : MonoBehaviour
         blueKey.SetActive(false);
         orangeKey.SetActive(false);
         purpleKey.SetActive(false);
+    }
+
+    public void SetMaxStats(int maxHealth, int maxArmor)
+    {
+        maxHealthValue = maxHealth;
+        maxArmorValue = maxArmor;
     }
 }
