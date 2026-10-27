@@ -1377,7 +1377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   sensitivity: 1.5
   smoothing: 1.5
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 330585546}
   verticalSensitivity: 1.5
   minPitch: -60
   maxPitch: 60
@@ -1397,6 +1397,16 @@ MonoBehaviour:
   playerSpeed: 10
   momentumDamping: 5
   camAnim: {fileID: 330585548}
+  sprintMultiplier: 1.5
+  crouchMultiplier: 0.5
+  crouchHeight: 1.2
+  cameraRoot: {fileID: 2056302158}
+  crouchCameraOffset: -0.8
+  crouchSmooth: 10
+  idleNoise: 2
+  crouchNoise: 4
+  walkNoise: 8
+  sprintNoise: 16
 --- !u!143 &192112505
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1435,7 +1445,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 330585546}
+  - {fileID: 2056302158}
   - {fileID: 450247102}
   - {fileID: 554137204}
   m_Father: {fileID: 0}
@@ -3511,14 +3521,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 634865447}
   - {fileID: 921754187}
-  m_Father: {fileID: 192112506}
+  m_Father: {fileID: 2056302158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -29298,3 +29308,35 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2351725858380693811, guid: 775dcdb85b9f4f043b09939ee4f2ab17, type: 3}
   m_PrefabInstance: {fileID: 336123167}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2056302157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2056302158}
+  m_Layer: 0
+  m_Name: CameraRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2056302158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056302157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 330585546}
+  m_Father: {fileID: 192112506}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
