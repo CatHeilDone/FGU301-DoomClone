@@ -5,6 +5,7 @@ public class BossController : MonoBehaviour
 {
     [Header("Activation")]
     public Transform player;
+
     [Tooltip("When the player gets this close (meters) the fight starts")]
     public float activationRange = 25f;
     public float startDelay = 2f;
@@ -15,7 +16,9 @@ public class BossController : MonoBehaviour
     public bool canTurn = true;
 
     [Header("Hovering")]
-    [Tooltip("Height of the sphere's center above the boss's feet (meters). Lower it if the room's ceiling is low")]
+    [Tooltip(
+        "Height of the sphere's center above the boss's feet (meters). Lower it if the room's ceiling is low"
+    )]
     public float hoverHeight = 5.5f;
     public float bobAmplitude = 0.3f;
     public float bobSpeed = 1.2f;
@@ -24,16 +27,22 @@ public class BossController : MonoBehaviour
     public bool chasePlayer = true;
     public float chaseSpeed = 3.5f;
     public float chaseSpeedPhase2 = 5f;
+
     [Tooltip("How quickly the boss speeds up / slows down (m/s per second)")]
     public float chaseAcceleration = 4f;
+
     [Tooltip("The boss stops this close to the player (meters)")]
     public float chaseStopDistance = 9f;
+
     [Tooltip("If the player is farther than this, the boss stays put")]
     public float chaseMaxPlayerDistance = 60f;
+
     [Tooltip("The boss never goes farther than this from where it started")]
     public float leashRadius = 30f;
+
     [Tooltip("Size used to check for walls while flying (the body is about 3)")]
     public float bodyRadius = 2.8f;
+
     [Tooltip("Speed multiplier while charging a laser, before the aim locks")]
     public float chargeMoveMultiplier = 0.5f;
 
@@ -48,13 +57,17 @@ public class BossController : MonoBehaviour
     public Material warningMaterial;
     public Material beamMaterial;
     public Color eyeGlowColor = new Color(1f, 0.2f, 0.2f);
+
     [Tooltip("Total charge time before firing (seconds)")]
     public float laserChargeTime = 1.5f;
+
     [Tooltip("The aim locks at this time. The rest is the player's time to dodge")]
     public float laserLockTime = 0.8f;
+
     [Tooltip("Layers that block the beams and can be hit: walls, pillars, the player")]
     public LayerMask laserMask = 1;
     public float laserMaxLength = 60f;
+
     [Tooltip("Hits on an eye while charging that interrupt the attack")]
     public int eyeHitsToInterrupt = 1;
     public float interruptStunTime = 1.5f;
@@ -62,19 +75,24 @@ public class BossController : MonoBehaviour
     [Header("Horizontal laser")]
     public float laserFireTime = 0.7f;
     public int laserDamage = 20;
+
     [Tooltip("Beam thickness used for hit detection (meters)")]
     public float laserRadius = 0.4f;
 
     [Header("Vertical laser")]
     [Tooltip("Found automatically (the child named Model)")]
     public Transform model;
+
     [Tooltip("How far the head tilts back while charging (degrees)")]
     public float verticalTiltAngle = 25f;
     public float verticalSweepTime = 0.6f;
+
     [Tooltip("Start angle of the beam (negative = pointing up)")]
     public float verticalSweepFrom = -20f;
+
     [Tooltip("End angle of the beam (positive = pointing down at the floor)")]
     public float verticalSweepTo = 70f;
+
     [Tooltip("Half the width of the danger strip (meters)")]
     public float verticalBeamRadius = 0.6f;
     public int verticalDamage = 25;
@@ -83,21 +101,25 @@ public class BossController : MonoBehaviour
     [Header("Stomp")]
     [Tooltip("Radius of the danger zone around the boss (meters)")]
     public float stompRadius = 12f;
+
     [Tooltip("How much higher the boss rises before slamming down (meters)")]
     public float stompRiseHeight = 3f;
     public float stompRiseTime = 1.2f;
     public float stompFallTime = 0.3f;
+
     [Tooltip("Height of the sphere's center when it lands (radius 3 + 0.1)")]
     public float landedHeight = 3.1f;
     public float shockwaveTime = 0.5f;
     public int stompDamage = 10;
     public float playerStunTime = 1.5f;
+
     [Tooltip("How long the boss lies stunned on the floor (seconds)")]
     public float stompRecoverTime = 2.5f;
     public float stompReturnTime = 1f;
 
     [Header("Phase 2 (below 50% health)")]
     public Color phase2BodyColor = new Color(1f, 0.55f, 0.5f);
+
     [Tooltip("Second horizontal laser shot: shorter charge time")]
     public float phase2SecondCharge = 1.1f;
     public float phase2SecondLock = 0.45f;
@@ -105,6 +127,7 @@ public class BossController : MonoBehaviour
 
     [Header("When defeated")]
     public float deathFallTime = 1.5f;
+
     [Tooltip("How long to wait after the boss lies down before showing YOU WIN")]
     public float victoryDelay = 1.5f;
     public Color deadColor = new Color(0.25f, 0.25f, 0.28f);
@@ -145,20 +168,65 @@ public class BossController : MonoBehaviour
     static readonly RaycastHit[] castBuffer = new RaycastHit[8];
 
     // Hovering
-    float heightOffset;          // extra offset from the stomp / death
+    float heightOffset; // extra offset from the stomp / death
     bool bobbing = true;
     float bobScale = 1f;
-    float modelBaseX, modelBaseZ;
+    float modelBaseX,
+        modelBaseZ;
 
     static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
     static readonly int ColorId = Shader.PropertyToID("_Color");
 
+    [Header("Boss Sound Effects")]
+    [SerializeField]
+    private AudioSource chargeAudioSource;
+
+    [SerializeField]
+    private AudioSource effectsAudioSource;
+
+    [SerializeField]
+    private AudioClip laserChargeSFX;
+
+    [SerializeField]
+    private AudioClip laserFireSFX;
+
+    [SerializeField]
+    private AudioClip stompRiseSFX;
+
+    [SerializeField]
+    private AudioClip stompImpactSFX;
+
+    void PlayLaserCharge()
+    {
+        if (!chargeAudioSource || !laserChargeSFX)
+            return;
+
+        chargeAudioSource.Stop();
+        chargeAudioSource.clip = laserChargeSFX;
+        chargeAudioSource.Play();
+    }
+
+    void StopLaserCharge()
+    {
+        if (chargeAudioSource)
+            chargeAudioSource.Stop();
+    }
+
+    void PlayEffect(AudioClip clip, float volume = 1f)
+    {
+        if (effectsAudioSource && clip)
+            effectsAudioSource.PlayOneShot(clip, volume);
+    }
+
     void Awake()
     {
         health = GetComponent<BossHealth>();
-        if (!eyeL) eyeL = transform.Find("Model/EyeL");
-        if (!eyeR) eyeR = transform.Find("Model/EyeR");
-        if (!model) model = transform.Find("Model");
+        if (!eyeL)
+            eyeL = transform.Find("Model/EyeL");
+        if (!eyeR)
+            eyeR = transform.Find("Model/EyeR");
+        if (!model)
+            model = transform.Find("Model");
         if (model)
         {
             modelBaseX = model.localPosition.x;
@@ -172,15 +240,18 @@ public class BossController : MonoBehaviour
         if (!player)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
-            if (p) player = p.transform;
+            if (p)
+                player = p.transform;
         }
         if (player)
         {
             playerHealth = player.GetComponentInParent<PlayerHealth>();
             playerMove = player.GetComponentInParent<PlayerMove>();
         }
-        if (!playerHealth) playerHealth = FindFirstObjectByType<PlayerHealth>();
-        if (!playerMove) playerMove = FindFirstObjectByType<PlayerMove>();
+        if (!playerHealth)
+            playerHealth = FindFirstObjectByType<PlayerHealth>();
+        if (!playerMove)
+            playerMove = FindFirstObjectByType<PlayerMove>();
 
         SetupEyes();
 
@@ -191,12 +262,14 @@ public class BossController : MonoBehaviour
 
     void OnDisable()
     {
-        if (playerMove) playerMove.enabled = true;   // in case the player is stunned
+        if (playerMove)
+            playerMove.enabled = true; // in case the player is stunned
     }
 
     void OnDestroy()
     {
-        if (!health) return;
+        if (!health)
+            return;
         health.OnDied -= HandleDied;
         health.OnPhase2 -= HandlePhase2;
         health.OnWeakPointHit -= HandleWeakPointHit;
@@ -212,26 +285,44 @@ public class BossController : MonoBehaviour
         beamLines = new LineRenderer[2];
 
         if (!warningMaterial || !beamMaterial)
-            Debug.LogWarning("[Boss] Warning Material / Beam Material are not assigned on BossController");
+            Debug.LogWarning(
+                "[Boss] Warning Material / Beam Material are not assigned on BossController"
+            );
 
-        if (!bodyRenderer) bodyRenderer = FindBodyRenderer();
+        if (!bodyRenderer)
+            bodyRenderer = FindBodyRenderer();
 
         for (int i = 0; i < 2; i++)
         {
-            if (!eyes[i]) { Debug.LogError("[Boss] Could not find eye " + i); continue; }
+            if (!eyes[i])
+            {
+                Debug.LogError("[Boss] Could not find eye " + i);
+                continue;
+            }
 
             eyeRenderers[i] = eyes[i].GetComponent<Renderer>();
             eyeWeakPoints[i] = eyes[i].GetComponent<WeakPoint>();
-            if (eyeRenderers[i]) eyeBaseColors[i] = eyeRenderers[i].material.color;
+            if (eyeRenderers[i])
+                eyeBaseColors[i] = eyeRenderers[i].material.color;
 
             warningLines[i] = MakeLine("LaserWarning", eyes[i], warningMaterial, 0.06f);
             beamLines[i] = MakeLine("LaserBeam", eyes[i], beamMaterial, laserRadius * 2f);
         }
 
         // Vertical laser: floor strip and the slashing beam
-        floorWarningLine = MakeLine("FloorWarning", transform, warningMaterial, verticalBeamRadius * 2f);
+        floorWarningLine = MakeLine(
+            "FloorWarning",
+            transform,
+            warningMaterial,
+            verticalBeamRadius * 2f
+        );
         floorWarningLine.alignment = LineAlignment.TransformZ;
-        verticalBeamLine = MakeLine("VerticalBeam", transform, beamMaterial, verticalBeamRadius * 2f);
+        verticalBeamLine = MakeLine(
+            "VerticalBeam",
+            transform,
+            beamMaterial,
+            verticalBeamRadius * 2f
+        );
 
         // Stomp: warning circle and shockwave ring
         stompWarnLine = MakeCircle("StompWarning", warningMaterial, 0.2f);
@@ -245,14 +336,18 @@ public class BossController : MonoBehaviour
         if (body && body.gameObject.activeInHierarchy)
         {
             var r = body.GetComponent<Renderer>();
-            if (r) return r;
+            if (r)
+                return r;
         }
-        if (!model) return null;
+        if (!model)
+            return null;
 
-        foreach (var r in model.GetComponentsInChildren<Renderer>())   // active objects only
+        foreach (var r in model.GetComponentsInChildren<Renderer>()) // active objects only
         {
-            if (r is LineRenderer) continue;
-            if (r.GetComponent<WeakPoint>()) continue;
+            if (r is LineRenderer)
+                continue;
+            if (r.GetComponent<WeakPoint>())
+                continue;
             return r;
         }
         return null;
@@ -262,19 +357,31 @@ public class BossController : MonoBehaviour
     static bool TryGetColor(Renderer r, out Color c)
     {
         c = Color.white;
-        if (!r) return false;
+        if (!r)
+            return false;
         var m = r.material;
-        if (m.HasProperty(BaseColorId)) { c = m.GetColor(BaseColorId); return true; }
-        if (m.HasProperty(ColorId)) { c = m.GetColor(ColorId); return true; }
+        if (m.HasProperty(BaseColorId))
+        {
+            c = m.GetColor(BaseColorId);
+            return true;
+        }
+        if (m.HasProperty(ColorId))
+        {
+            c = m.GetColor(ColorId);
+            return true;
+        }
         return false;
     }
 
     static void SetColor(Renderer r, Color c)
     {
-        if (!r) return;
+        if (!r)
+            return;
         var m = r.material;
-        if (m.HasProperty(BaseColorId)) m.SetColor(BaseColorId, c);
-        if (m.HasProperty(ColorId)) m.SetColor(ColorId, c);
+        if (m.HasProperty(BaseColorId))
+            m.SetColor(BaseColorId, c);
+        if (m.HasProperty(ColorId))
+            m.SetColor(ColorId, c);
     }
 
     LineRenderer MakeLine(string objName, Transform parent, Material mat, float width)
@@ -306,10 +413,11 @@ public class BossController : MonoBehaviour
     {
         ApplyHover();
 
-        if (health.IsDead || !player) return;
+        if (health.IsDead || !player)
+            return;
 
         Vector3 toPlayer = player.position - transform.position;
-        toPlayer.y = 0f;   // only rotate around the vertical axis
+        toPlayer.y = 0f; // only rotate around the vertical axis
 
         if (!activated)
         {
@@ -325,7 +433,10 @@ public class BossController : MonoBehaviour
         {
             Quaternion target = Quaternion.LookRotation(toPlayer);
             transform.rotation = Quaternion.RotateTowards(
-                transform.rotation, target, turnSpeed * Time.deltaTime);
+                transform.rotation,
+                target,
+                turnSpeed * Time.deltaTime
+            );
         }
 
         ChasePlayer(toPlayer);
@@ -334,7 +445,8 @@ public class BossController : MonoBehaviour
     // Keeps the head floating at hoverHeight with a gentle bob
     void ApplyHover()
     {
-        if (!model) return;
+        if (!model)
+            return;
         bobScale = Mathf.MoveTowards(bobScale, bobbing ? 1f : 0f, Time.deltaTime * 2f);
         float bob = Mathf.Sin(Time.time * bobSpeed) * bobAmplitude * bobScale;
         model.localPosition = new Vector3(modelBaseX, hoverHeight + heightOffset + bob, modelBaseZ);
@@ -348,19 +460,32 @@ public class BossController : MonoBehaviour
         float dist = toPlayerFlat.magnitude;
         float targetSpeed = 0f;
 
-        if (chasePlayer && !health.IsBroken && dist > chaseStopDistance && dist <= chaseMaxPlayerDistance)
+        if (
+            chasePlayer
+            && !health.IsBroken
+            && dist > chaseStopDistance
+            && dist <= chaseMaxPlayerDistance
+        )
         {
             float mult;
-            if (!attacking) mult = 1f;                                   // between attacks: full speed
-            else if (charging && canTurn) mult = chargeMoveMultiplier;   // charging, aim not locked yet
-            else mult = 0f;                                              // locked / stomping / stunned: stand still
+            if (!attacking)
+                mult = 1f; // between attacks: full speed
+            else if (charging && canTurn)
+                mult = chargeMoveMultiplier; // charging, aim not locked yet
+            else
+                mult = 0f; // locked / stomping / stunned: stand still
 
             float speed = health.IsPhase2 ? chaseSpeedPhase2 : chaseSpeed;
             targetSpeed = speed * mult;
         }
 
-        chaseVelocity = Mathf.MoveTowards(chaseVelocity, targetSpeed, chaseAcceleration * Time.deltaTime);
-        if (chaseVelocity < 0.01f) return;
+        chaseVelocity = Mathf.MoveTowards(
+            chaseVelocity,
+            targetSpeed,
+            chaseAcceleration * Time.deltaTime
+        );
+        if (chaseVelocity < 0.01f)
+            return;
 
         Vector3 step = toPlayerFlat.normalized * chaseVelocity * Time.deltaTime;
         step = ClipMovement(step);
@@ -373,7 +498,11 @@ public class BossController : MonoBehaviour
         if (fromHome.magnitude > leashRadius)
         {
             fromHome = fromHome.normalized * leashRadius;
-            newPos = new Vector3(homePosition.x + fromHome.x, transform.position.y, homePosition.z + fromHome.z);
+            newPos = new Vector3(
+                homePosition.x + fromHome.x,
+                transform.position.y,
+                homePosition.z + fromHome.z
+            );
         }
         transform.position = newPos;
     }
@@ -382,7 +511,8 @@ public class BossController : MonoBehaviour
     Vector3 ClipMovement(Vector3 step)
     {
         float len = step.magnitude;
-        if (len < 1e-5f) return step;
+        if (len < 1e-5f)
+            return step;
 
         Vector3 origin = model ? model.position : transform.position + Vector3.up * hoverHeight;
 
@@ -402,16 +532,29 @@ public class BossController : MonoBehaviour
     bool BlockedAlong(Vector3 origin, Vector3 dir, float dist, out RaycastHit nearest)
     {
         nearest = default;
-        int n = Physics.SphereCastNonAlloc(origin, bodyRadius, dir, castBuffer, dist,
-            laserMask, QueryTriggerInteraction.Ignore);
+        int n = Physics.SphereCastNonAlloc(
+            origin,
+            bodyRadius,
+            dir,
+            castBuffer,
+            dist,
+            laserMask,
+            QueryTriggerInteraction.Ignore
+        );
 
         float best = float.MaxValue;
         bool found = false;
         for (int i = 0; i < n; i++)
         {
             var h = castBuffer[i];
-            if (h.collider.transform.IsChildOf(transform)) continue;   // ignore ourselves
-            if (h.distance < best) { best = h.distance; nearest = h; found = true; }
+            if (h.collider.transform.IsChildOf(transform))
+                continue; // ignore ourselves
+            if (h.distance < best)
+            {
+                best = h.distance;
+                nearest = h;
+                found = true;
+            }
         }
         return found;
     }
@@ -438,9 +581,15 @@ public class BossController : MonoBehaviour
             attacking = true;
             switch (index % 3)
             {
-                case 0: yield return StartCoroutine(LaserHorizontal()); break;
-                case 1: yield return StartCoroutine(LaserVertical()); break;
-                default: yield return StartCoroutine(Stomp()); break;
+                case 0:
+                    yield return StartCoroutine(LaserHorizontal());
+                    break;
+                case 1:
+                    yield return StartCoroutine(LaserVertical());
+                    break;
+                default:
+                    yield return StartCoroutine(Stomp());
+                    break;
             }
             index++;
             attacking = false;
@@ -466,14 +615,17 @@ public class BossController : MonoBehaviour
 
             yield return StartCoroutine(LaserShot(charge, lockT));
 
-            if (laserInterrupted) yield break;   // interrupted: cancel the remaining shot
-            if (i < shots - 1) yield return new WaitForSeconds(phase2ShotGap);
+            if (laserInterrupted)
+                yield break; // interrupted: cancel the remaining shot
+            if (i < shots - 1)
+                yield return new WaitForSeconds(phase2ShotGap);
         }
     }
 
     IEnumerator LaserShot(float chargeTime, float lockTime)
     {
         currentAction = "Horizontal laser: charging";
+        PlayLaserCharge();
         charging = true;
         chargeHits = 0;
 
@@ -509,8 +661,12 @@ public class BossController : MonoBehaviour
         }
 
         charging = false;
+        StopLaserCharge();
+
         HideLines(warningLines);
         currentAction = "Horizontal laser: firing";
+
+        PlayEffect(laserFireSFX);
 
         // Fire
         bool alreadyHit = false;
@@ -521,8 +677,9 @@ public class BossController : MonoBehaviour
             bool touchedPlayer = DrawLines(beamLines, aimPoint);
             if (touchedPlayer && !alreadyHit)
             {
-                alreadyHit = true;   // damage only once per shot
-                if (playerHealth) playerHealth.DamagePlayer(laserDamage);
+                alreadyHit = true; // damage only once per shot
+                if (playerHealth)
+                    playerHealth.DamagePlayer(laserDamage);
             }
             yield return null;
         }
@@ -537,6 +694,7 @@ public class BossController : MonoBehaviour
     IEnumerator LaserVertical()
     {
         currentAction = "Vertical laser: charging";
+        PlayLaserCharge();
         charging = true;
         chargeHits = 0;
 
@@ -574,14 +732,18 @@ public class BossController : MonoBehaviour
         }
 
         charging = false;
+        StopLaserCharge();
+
         currentAction = "Vertical laser: slash";
+        PlayEffect(laserFireSFX);
 
         // Beam origin: right in front of the boss, at eye height
         Vector3 eyeMid = FaceOrigin();
         Vector3 horiz = eyeMid - transform.position;
         horiz.y = 0f;
-        Vector3 origin = new Vector3(transform.position.x, eyeMid.y, transform.position.z)
-                         + lockedDir * horiz.magnitude;
+        Vector3 origin =
+            new Vector3(transform.position.x, eyeMid.y, transform.position.z)
+            + lockedDir * horiz.magnitude;
         Vector3 right = Vector3.Cross(Vector3.up, lockedDir);
 
         // Slash: the beam sweeps from the sky down to the floor inside the strip's plane
@@ -594,14 +756,24 @@ public class BossController : MonoBehaviour
             Vector3 dir = Quaternion.AngleAxis(angle, right) * lockedDir;
 
             float len = laserMaxLength;
-            if (Physics.SphereCast(origin, verticalBeamRadius, dir, out RaycastHit hit,
-                    laserMaxLength, laserMask, QueryTriggerInteraction.Ignore))
+            if (
+                Physics.SphereCast(
+                    origin,
+                    verticalBeamRadius,
+                    dir,
+                    out RaycastHit hit,
+                    laserMaxLength,
+                    laserMask,
+                    QueryTriggerInteraction.Ignore
+                )
+            )
             {
                 len = hit.distance;
                 if (!alreadyHit && hit.collider.GetComponentInParent<PlayerHealth>())
                 {
                     alreadyHit = true;
-                    if (playerHealth) playerHealth.DamagePlayer(verticalDamage);
+                    if (playerHealth)
+                        playerHealth.DamagePlayer(verticalDamage);
                 }
             }
 
@@ -623,8 +795,16 @@ public class BossController : MonoBehaviour
 
     float FloorY()
     {
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit h,
-                20f, laserMask, QueryTriggerInteraction.Ignore))
+        if (
+            Physics.Raycast(
+                transform.position + Vector3.up,
+                Vector3.down,
+                out RaycastHit h,
+                20f,
+                laserMask,
+                QueryTriggerInteraction.Ignore
+            )
+        )
             return h.point.y;
         return transform.position.y;
     }
@@ -638,29 +818,34 @@ public class BossController : MonoBehaviour
 
     Vector3 FaceOrigin()
     {
-        if (eyeL && eyeR) return (eyeL.position + eyeR.position) * 0.5f;
+        if (eyeL && eyeR)
+            return (eyeL.position + eyeR.position) * 0.5f;
         return transform.position + Vector3.up * hoverHeight;
     }
 
     void DrawFloorLine(Vector3 dir, float floorY)
     {
-        if (!floorWarningLine) return;
+        if (!floorWarningLine)
+            return;
         Vector3 start = new Vector3(transform.position.x, floorY + 0.05f, transform.position.z);
         floorWarningLine.enabled = true;
-        floorWarningLine.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);   // lies flat on the floor
+        floorWarningLine.transform.rotation = Quaternion.Euler(-90f, 0f, 0f); // lies flat on the floor
         floorWarningLine.SetPosition(0, start);
         floorWarningLine.SetPosition(1, start + dir * verticalWarnLength);
     }
 
     void HideVerticalVisuals()
     {
-        if (floorWarningLine) floorWarningLine.enabled = false;
-        if (verticalBeamLine) verticalBeamLine.enabled = false;
+        if (floorWarningLine)
+            floorWarningLine.enabled = false;
+        if (verticalBeamLine)
+            verticalBeamLine.enabled = false;
     }
 
     void SetHeadTilt(float angle)
     {
-        if (model) model.localRotation = Quaternion.Euler(-angle, 0f, 0f);
+        if (model)
+            model.localRotation = Quaternion.Euler(-angle, 0f, 0f);
     }
 
     IEnumerator LowerHead(float duration)
@@ -680,6 +865,7 @@ public class BossController : MonoBehaviour
     IEnumerator Stomp()
     {
         currentAction = "Stomp: rising";
+        PlayEffect(stompRiseSFX);
         canTurn = false;
         bobbing = false;
 
@@ -693,7 +879,11 @@ public class BossController : MonoBehaviour
         while (t < stompRiseTime)
         {
             t += Time.deltaTime;
-            heightOffset = Mathf.Lerp(0f, stompRiseHeight, Mathf.SmoothStep(0f, 1f, t / stompRiseTime));
+            heightOffset = Mathf.Lerp(
+                0f,
+                stompRiseHeight,
+                Mathf.SmoothStep(0f, 1f, t / stompRiseTime)
+            );
             ShowCircle(stompWarnLine, center, stompRadius);
             yield return null;
         }
@@ -708,11 +898,16 @@ public class BossController : MonoBehaviour
             heightOffset = Mathf.Lerp(stompRiseHeight, landOffset, k * k);
             yield return null;
         }
+
         heightOffset = landOffset;
         HideLine(stompWarnLine);
 
+        // Âm thanh va chạm phát đúng lúc Boss chạm đất
+        PlayEffect(stompImpactSFX, 1.5f);
+
         // 3) Shockwave spreads out
         currentAction = "Stomp: shockwave";
+
         bool alreadyHit = false;
         t = 0f;
         while (t < shockwaveTime)
@@ -728,7 +923,8 @@ public class BossController : MonoBehaviour
                 if (d.magnitude <= r)
                 {
                     alreadyHit = true;
-                    if (playerHealth) playerHealth.DamagePlayer(stompDamage);
+                    if (playerHealth)
+                        playerHealth.DamagePlayer(stompDamage);
                     StunPlayer(playerStunTime);
                 }
             }
@@ -746,7 +942,11 @@ public class BossController : MonoBehaviour
         while (t < stompReturnTime)
         {
             t += Time.deltaTime;
-            heightOffset = Mathf.Lerp(landOffset, 0f, Mathf.SmoothStep(0f, 1f, t / stompReturnTime));
+            heightOffset = Mathf.Lerp(
+                landOffset,
+                0f,
+                Mathf.SmoothStep(0f, 1f, t / stompReturnTime)
+            );
             yield return null;
         }
         heightOffset = 0f;
@@ -756,9 +956,10 @@ public class BossController : MonoBehaviour
 
     void ShowCircle(LineRenderer lr, Vector3 center, float radius)
     {
-        if (!lr) return;
+        if (!lr)
+            return;
         lr.enabled = true;
-        lr.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);   // lies flat on the floor
+        lr.transform.rotation = Quaternion.Euler(-90f, 0f, 0f); // lies flat on the floor
         int n = lr.positionCount;
         for (int i = 0; i < n; i++)
         {
@@ -769,19 +970,22 @@ public class BossController : MonoBehaviour
 
     void HideLine(LineRenderer lr)
     {
-        if (lr) lr.enabled = false;
+        if (lr)
+            lr.enabled = false;
     }
 
     // Freezes the player's movement for a while (they can still look around)
     void StunPlayer(float duration)
     {
-        if (playerMove) StartCoroutine(StunPlayerRoutine(duration));
+        if (playerMove)
+            StartCoroutine(StunPlayerRoutine(duration));
     }
 
     IEnumerator StunPlayerRoutine(float duration)
     {
         playerMove.enabled = false;
-        if (playerMove.camAnim) playerMove.camAnim.SetBool("isWalking", false);
+        if (playerMove.camAnim)
+            playerMove.camAnim.SetBool("isWalking", false);
         yield return new WaitForSeconds(duration);
         playerMove.enabled = true;
     }
@@ -798,6 +1002,7 @@ public class BossController : MonoBehaviour
         ResetEyes();
         canTurn = true;
         yield return new WaitForSeconds(interruptStunTime);
+        StopLaserCharge();
     }
 
     // Draws a beam from each eye toward the aim point. Returns true if a beam touches the player
@@ -807,17 +1012,28 @@ public class BossController : MonoBehaviour
 
         for (int i = 0; i < eyes.Length; i++)
         {
-            if (!eyes[i] || lines[i] == null) continue;
+            if (!eyes[i] || lines[i] == null)
+                continue;
 
             Vector3 origin = eyes[i].position;
             Vector3 dir = (aimPoint - origin).normalized;
             float len = laserMaxLength;
 
-            if (Physics.SphereCast(origin, laserRadius, dir, out RaycastHit hit,
-                    laserMaxLength, laserMask, QueryTriggerInteraction.Ignore))
+            if (
+                Physics.SphereCast(
+                    origin,
+                    laserRadius,
+                    dir,
+                    out RaycastHit hit,
+                    laserMaxLength,
+                    laserMask,
+                    QueryTriggerInteraction.Ignore
+                )
+            )
             {
                 len = hit.distance;
-                if (hit.collider.GetComponentInParent<PlayerHealth>()) hitPlayer = true;
+                if (hit.collider.GetComponentInParent<PlayerHealth>())
+                    hitPlayer = true;
             }
 
             lines[i].enabled = true;
@@ -829,18 +1045,23 @@ public class BossController : MonoBehaviour
 
     void HideLines(LineRenderer[] lines)
     {
-        if (lines == null) return;
+        if (lines == null)
+            return;
         foreach (var lr in lines)
-            if (lr) lr.enabled = false;
+            if (lr)
+                lr.enabled = false;
     }
 
     void SetEyeGlow(float k)
     {
-        if (eyeRenderers == null) return;
+        if (eyeRenderers == null)
+            return;
         for (int i = 0; i < eyeRenderers.Length; i++)
         {
-            if (!eyeRenderers[i]) continue;
-            if (eyeWeakPoints[i] && eyeWeakPoints[i].IsBroken) continue;   // a broken eye keeps its gray color
+            if (!eyeRenderers[i])
+                continue;
+            if (eyeWeakPoints[i] && eyeWeakPoints[i].IsBroken)
+                continue; // a broken eye keeps its gray color
             eyeRenderers[i].material.color = Color.Lerp(eyeBaseColors[i], eyeGlowColor, k);
         }
     }
@@ -867,7 +1088,8 @@ public class BossController : MonoBehaviour
 
     IEnumerator TintBody(Color target, float duration)
     {
-        if (!bodyRenderer || !TryGetColor(bodyRenderer, out Color from)) yield break;
+        if (!bodyRenderer || !TryGetColor(bodyRenderer, out Color from))
+            yield break;
 
         float t = 0f;
         while (t < duration)
@@ -888,7 +1110,8 @@ public class BossController : MonoBehaviour
         HideLine(stompWarnLine);
         HideLine(shockwaveLine);
         SetHeadTilt(0f);
-        if (playerMove) playerMove.enabled = true;   // release the player if the boss dies mid-stun
+        if (playerMove)
+            playerMove.enabled = true; // release the player if the boss dies mid-stun
         attacking = false;
         chaseVelocity = 0f;
         canTurn = false;
@@ -904,7 +1127,8 @@ public class BossController : MonoBehaviour
         // eyes go dark, body darkens
         if (eyeRenderers != null)
             foreach (var r in eyeRenderers)
-                if (r) r.material.color = deadColor;
+                if (r)
+                    r.material.color = deadColor;
         SetColor(bodyRenderer, deadColor);
 
         float floorY = FloorY();
@@ -922,7 +1146,8 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(victoryDelay);
 
-        if (ScoreManager.Instance) ScoreManager.Instance.TriggerVictory();
+        if (ScoreManager.Instance)
+            ScoreManager.Instance.TriggerVictory();
     }
 
     void OnDrawGizmosSelected()
@@ -934,6 +1159,9 @@ public class BossController : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseStopDistance);
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(Application.isPlaying ? homePosition : transform.position, leashRadius);
+        Gizmos.DrawWireSphere(
+            Application.isPlaying ? homePosition : transform.position,
+            leashRadius
+        );
     }
 }
