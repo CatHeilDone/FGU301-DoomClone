@@ -54,11 +54,13 @@ public class BossHealth : MonoBehaviour
 
         Debug.Log($"Boss nhận {dmg:0.0} sát thương" + (weakPoint ? $" vào {weakPoint.name}" : ""));
         ApplyDamage(dmg);
+        if (ScoreManager.Instance) ScoreManager.Instance.BossHit(dmg);
         if (IsDead) return;
 
         if (weakPoint != null && weakPoint.TakeHit(dmg))
         {
             brokenCount++;
+            if (ScoreManager.Instance) ScoreManager.Instance.BossWeakPointBroken();
             OnWeakPointBroken?.Invoke(weakPoint);
             ApplyDamage(maxHealth * weakPointBreakBonus);
             if (IsDead) return;
