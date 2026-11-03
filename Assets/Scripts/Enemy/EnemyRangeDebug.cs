@@ -42,19 +42,19 @@ public class EnemyRangeDebug : MonoBehaviour
         if (Application.isPlaying && player)
             Gizmos.DrawLine(transform.position, player.transform.position);   // đường nối enemy - Player
     }
+  
+    // void OnGUI()
+    // {
+    //     if (!player || !awareness) return;
 
-    void OnGUI()
-    {
-        if (!player || !awareness) return;
+    //     float dist = Vector3.Distance(transform.position, player.transform.position);
 
-        float dist = Vector3.Distance(transform.position, player.transform.position);
-
-        GUI.color = awareness.isAggro ? Color.red : Color.green;
-        GUI.Label(new Rect(10, 40, 600, 25),
-            "Distance: " + dist.ToString("F1") + " m   |   Detect radius: " + DetectRadius().ToString("F1") +
-            " m (Noise " + player.NoiseRadius + ", Close " + awareness.closeSenseRadius + ")");
-        GUI.Label(new Rect(10, 62, 600, 25),
-            "Aggro: " + (awareness.isAggro ? "YES" : "NO") + "   |   [" + resetKey + "] = reset aggro");
-        GUI.color = Color.white;
-    }
+    //     GUI.color = awareness.isAggro ? Color.red : Color.green;
+    //     GUI.Label(new Rect(10, 40, 600, 25),
+    //         "Distance: " + dist.ToString("F1") + " m   |   Detect radius: " + DetectRadius().ToString("F1") +
+    //         " m (Noise " + player.NoiseRadius + ", Close " + awareness.closeSenseRadius + ")");
+    //     GUI.Label(new Rect(10, 62, 600, 25),
+    //         "Aggro: " + (awareness.isAggro ? "YES" : "NO") + "   |   [" + resetKey + "] = reset aggro");
+    //     GUI.color = Color.white;
+    // }
 }
